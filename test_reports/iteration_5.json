@@ -1,0 +1,62 @@
+{
+  "summary": "Iteration 5 — Verified Region-Aware Prices (INR/USD), localised Hire Me pills, and Cover Letter Tone selector (warm/formal/bold). All 23 backend pytests pass. All frontend flows work end-to-end with no console/page errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Cover letter modal (opened from Contact section)",
+        "issues": [
+          "Modal is not centered to viewport — appears offset toward the left half of screen and the Contact section 'LOCATION' text (49, Baidyanath Dutta Sarani, Howrah — 113) visually overlaps the Tone pill row. Root cause: an ancestor of CoverLetterButton inside the Contact section has a CSS transform (likely from GSAP), which invalidates the `position: fixed; inset: 0` on the dialog backdrop and re-anchors it to the transformed ancestor. This is why iteration-note warned that force:true is needed to click tone pills. Recommend rendering the modal via a React portal to document.body (createPortal) so it escapes the transformed ancestor. Not blocking — functionality works; tone can be selected and PDF downloads correctly."
+        ]
+      }
+    ]
+  },
+  "backend_pdf_verification": {
+    "warm": "GET /api/cover-letter?role=Product+Designer&tone=warm → 200 application/pdf. Extracted PDF text contains 'Dear Hiring Manager,' and 'Warm regards,'.",
+    "formal": "GET /api/cover-letter?role=Product+Designer&company=Linear&tone=formal → 200 pdf. Contains 'Dear Linear Hiring Team,' and 'Sincerely,'.",
+    "bold": "GET /api/cover-letter?role=Product+Designer&company=Linear&tone=bold → 200 pdf. Contains 'Hi Linear team,' and 'Talk soon,'.",
+    "invalid_tone_fallback": "tone=invalidjunk → 200 pdf. Falls back to warm ('Dear Hiring Manager,' + 'Warm regards,').",
+    "resume_regression": "GET /api/resume → 200 application/pdf, starts with %PDF-."
+  },
+  "frontend_verification": {
+    "default_currency_en_US": "USD (correct — en-US locale, no localStorage)",
+    "inr_prices": "'from ₹1.2L' / 'from ₹1.8L' / 'from ₹75k / wk' rendered; pills '< ₹1L', '₹1L – ₹3L', '₹3L – ₹6L', '₹6L+' rendered.",
+    "inr_default_pill_highlighted": "'₹1L – ₹3L' has borderColor rgb(0, 243, 255) — highlighted.",
+    "usd_prices": "'from $1.4k' / 'from $2.2k' / 'from $900 / wk' rendered; pills '< $1.2k', '$1.2k – $3.5k', '$3.5k – $7k', '$7k+' rendered.",
+    "usd_default_pill_highlighted": "'$1.2k – $3.5k' has borderColor rgb(0, 243, 255).",
+    "persistence": "localStorage.ap_currency = INR after switch; INR remains selected across page reload.",
+    "hire_post_status": 200,
+    "cover_letter_tone_default_warm": true,
+    "cover_letter_tone_requests": {
+      "formal": "https://.../api/cover-letter?role=Product+Designer&tone=formal&company=Linear",
+      "bold": "https://.../api/cover-letter?role=Product+Designer&tone=bold&company=Linear"
+    },
+    "console_errors": 0,
+    "page_errors": 0
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_cover_letter_and_currency.py",
+    "/app/backend/tests/test_portfolio_api.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Design polish, non-blocking) Render the CoverLetterButton dialog via ReactDOM.createPortal(..., document.body) so `position: fixed; inset: 0` isn't constrained by a transformed ancestor in the Contact section. This will center the modal and stop the location text from bleeding through."
+  ],
+  "critical_code_review_comments": [
+    "useCurrency.js: initial state is 'INR' before the useEffect swaps to detected/localStorage value → causes a brief flash where cards render INR then flip to USD on first paint. Consider lazy initializer that reads localStorage synchronously on mount to avoid the flash: `useState(() => readInitialCurrency())` — safe as long as it's guarded for SSR.",
+    "HireMeWidget budget-pill data-testids strip non-alphanumerics, so `< ₹1L` and `< $1.2k` both collapse to nearly identical ids (`hire-input-budget-1L` vs `hire-input-budget-12k`). Currently unique per currency, but if a new pill introduces a numeric collision it will silently reuse a testid. Consider a stable index-based key like `hire-input-budget-0..3`.",
+    "cover_letter.py L234 uses datetime.utcnow() which is deprecated in Python 3.12+; prefer datetime.now(timezone.utc).",
+    "Cover letter modal shares the same design/positioning issue flagged in design_issues — should be portalled."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_cover_letter_and_currency.py (new)"
+  ],
+  "success_rate": {"backend": "100% (23/23)", "frontend": "100% (all acceptance items)"},
+  "seed_data_creation": "TEST_ prefixed hire lead inserted via /api/hire (kept, not cleaned).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Currency toggle default follows navigator.language (en-US → USD). To exercise the INR default path in Playwright, either set page.emulate() with a hi-IN locale or pre-seed localStorage before the widget mounts. Cover letter modal positioning is offset due to transformed ancestor — use JS .click() or force=true on tone pills.",
+  "rca of the issue": "N/A — no functional failures."
+}

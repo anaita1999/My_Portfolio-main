@@ -1,0 +1,7 @@
+/* App wrapper */
+.App {
+    min-height: 100vh;
+    background: transparent;
+    color: var(--bone);
+    position: relative;
+}
