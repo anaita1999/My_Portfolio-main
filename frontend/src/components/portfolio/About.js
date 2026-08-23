@@ -2,12 +2,13 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ABOUT } from '@/constants/testIds';
-import { PROFILE, EDUCATION } from '@/lib/portfolioData';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 import useSectionView from '@/hooks/useSectionView';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
+  const { profile: PROFILE, education: EDUCATION } = usePortfolioContent();
   const rootRef = useRef(null);
   const viewRef = useSectionView('about');
 
@@ -15,21 +16,17 @@ export default function About() {
     ScrollTrigger.refresh();
     const ctx = gsap.context(() => {
       gsap.utils.toArray('[data-fade]').forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
+        gsap.from(el, {
+          opacity: 0,
+          y: 25,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
           },
-        );
+        });
       });
     }, rootRef);
     return () => ctx.revert();
@@ -90,7 +87,7 @@ export default function About() {
               <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#78837c] mr-2">
                 Languages:
               </span>
-              {PROFILE.languages.map((l) => (
+              {(PROFILE.languages || ['Bengali', 'Hindi', 'English']).map((l) => (
                 <span key={l} className="pill" style={{ padding: '6px 14px', fontSize: '11px' }}>
                   {l}
                 </span>

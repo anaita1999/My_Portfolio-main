@@ -1,8 +1,12 @@
 import os
 import pytest
 import requests
+import pyotp
 
 BASE_URL = os.environ['REACT_APP_BACKEND_URL'].rstrip('/') if os.environ.get('REACT_APP_BACKEND_URL') else 'http://127.0.0.1:8001'
+ADMIN_EMAIL = "anaita.pal.cse@gmail.com"
+ADMIN_PASSWORD = "Anaita@2026!SecureAdmin"
+TOTP_SECRET = "JBSWY3DPEHPK3PXP"
 
 
 @pytest.fixture
@@ -10,6 +14,21 @@ def api():
     s = requests.Session()
     s.headers.update({"Content-Type": "application/json"})
     return s
+
+
+def get_admin_headers(api):
+    r1 = api.post(f"{BASE_URL}/api/admin/login-step1", json={
+        "email": ADMIN_EMAIL,
+        "password": ADMIN_PASSWORD,
+    })
+    temp_token = r1.json()["temp_token"]
+    totp = pyotp.TOTP(TOTP_SECRET)
+    code = totp.now()
+    r2 = api.post(f"{BASE_URL}/api/admin/login-step2", json={
+        "temp_token": temp_token,
+        "code": code,
+    })
+    return {"Authorization": f"Bearer {r2.json()['access_token']}"}
 
 
 # --- root ---------------------------------------------------------------
@@ -59,8 +78,13 @@ def test_hire_post_success(api):
     assert data["budget"] == payload["budget"]
     assert "id" in data
 
-    # persistence check
-    r2 = api.get(f"{BASE_URL}/api/hire")
+    # 1. Unauthenticated GET must be rejected for client privacy (401)
+    r_unauth = api.get(f"{BASE_URL}/api/hire")
+    assert r_unauth.status_code == 401
+
+    # 2. Authenticated Admin GET returns leads
+    headers = get_admin_headers(api)
+    r2 = api.get(f"{BASE_URL}/api/hire", headers=headers)
     assert r2.status_code == 200
     assert any(l["id"] == data["id"] for l in r2.json())
 

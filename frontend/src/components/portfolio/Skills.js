@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SKILLS as SKILLS_IDS } from '@/constants/testIds';
-import { SKILLS } from '@/lib/portfolioData';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 import useSectionView from '@/hooks/useSectionView';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -73,6 +73,7 @@ const SKILL_DETAILS = {
 };
 
 export default function Skills() {
+  const { skills: SKILLS } = usePortfolioContent();
   const rootRef = useRef(null);
   const viewRef = useSectionView('skills');
 

@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CERTIFICATIONS as CERTS_DATA } from '@/lib/portfolioData';
 import { CERTIFICATIONS as CERTS_IDS } from '@/constants/testIds';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 import useSectionView from '@/hooks/useSectionView';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const slug = (s) => (s ? String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '');
 
 export default function Certifications() {
+  const { certifications: CERTS_DATA } = usePortfolioContent();
   const rootRef = useRef(null);
   const viewRef = useSectionView('certifications');
 
@@ -17,40 +18,32 @@ export default function Certifications() {
     ScrollTrigger.refresh();
     const ctx = gsap.context(() => {
       gsap.utils.toArray('[data-fade]').forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
+        gsap.from(el, {
+          opacity: 0,
+          y: 25,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
           },
-        );
+        });
       });
 
       gsap.utils.toArray('[data-cert-card]').forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: (i % 2) * 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
+        gsap.from(card, {
+          opacity: 0,
+          y: 25,
+          duration: 0.8,
+          delay: (i % 2) * 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
           },
-        );
+        });
       });
     }, rootRef);
     return () => ctx.revert();

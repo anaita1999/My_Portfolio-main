@@ -6,15 +6,22 @@ import { SERVICES } from '@/lib/portfolioData';
 import { HIRE } from '@/constants/testIds';
 import { track } from '@/lib/analytics';
 import useCurrency, { BUDGET_PILLS, DEFAULT_BUDGET } from '@/hooks/useCurrency';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export default function HireMeWidget() {
+  const { pricing } = usePortfolioContent();
   const [open, setOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const panelRef = useRef(null);
   const [currency, setCurrency] = useCurrency();
+
+  const dynamicPills = currency === 'INR'
+    ? (pricing?.budget_pills_inr || BUDGET_PILLS.INR)
+    : (pricing?.budget_pills_usd || BUDGET_PILLS.USD);
+
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -24,8 +31,11 @@ export default function HireMeWidget() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    setForm((f) => ({ ...f, budget: DEFAULT_BUDGET[currency] }));
-  }, [currency]);
+    const defaultBud = currency === 'INR'
+      ? (pricing?.default_budget_inr || DEFAULT_BUDGET.INR)
+      : (pricing?.default_budget_usd || DEFAULT_BUDGET.USD);
+    setForm((f) => ({ ...f, budget: defaultBud }));
+  }, [currency, pricing]);
 
   // Scroll proximity tracker: completely invisible at the top, gradually ramping up to 100% at the Contact section
   useEffect(() => {
@@ -326,7 +336,7 @@ export default function HireMeWidget() {
                       Approximate Budget ({currency})
                     </label>
                     <div className="grid grid-cols-2 gap-2">
-                      {BUDGET_PILLS[currency].map((b) => (
+                      {(dynamicPills || BUDGET_PILLS[currency]).map((b) => (
                         <button
                           key={b}
                           type="button"

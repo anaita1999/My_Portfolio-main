@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { toast } from 'sonner';
 import { CONTACT as CONTACT_IDS } from '@/constants/testIds';
-import { PROFILE } from '@/lib/portfolioData';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 import { track as trackEvent } from '@/lib/analytics';
 import ResumeButton from './ResumeButton';
 import CoverLetterButton from './CoverLetterButton';
@@ -11,9 +11,19 @@ import useSectionView from '@/hooks/useSectionView';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
+const API_BASE = (process.env.REACT_APP_BACKEND_URL || '').replace(/\/$/, '');
 
 export default function Contact() {
+  const { profile: dynamicProfile } = usePortfolioContent();
+  const PROFILE = dynamicProfile || {};
+
+  const email = PROFILE.email || 'anaita.pal.cse@gmail.com';
+  const phone = PROFILE.phone || '+91 7980958364';
+  const location = PROFILE.location || 'Howrah, West Bengal, India';
+  const name = PROFILE.name || 'Anaita Pal';
+  const linkedin = PROFILE.linkedin || 'https://www.linkedin.com/in/anaitapal1999/';
+  const github = PROFILE.github || 'https://github.com/anaita1999';
+
   const rootRef = useRef(null);
   const viewRef = useSectionView('contact');
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -23,21 +33,17 @@ export default function Contact() {
     ScrollTrigger.refresh();
     const ctx = gsap.context(() => {
       gsap.utils.toArray('[data-fade]').forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
+        gsap.from(el, {
+          opacity: 0,
+          y: 25,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
           },
-        );
+        });
       });
     }, rootRef);
     return () => ctx.revert();
@@ -74,7 +80,7 @@ export default function Contact() {
       }
     } catch (err) {
       console.error(err);
-      toast.error('Network error. Please email directly at ' + PROFILE.email);
+      toast.error('Network error. Please email directly at ' + email);
       trackEvent('contact_form_network_error', { error: String(err) });
     } finally {
       setLoading(false);
@@ -130,14 +136,14 @@ export default function Contact() {
 
             <div className="mt-10 space-y-4">
               <a
-                href={`mailto:${PROFILE.email}`}
+                href={`mailto:${email}`}
                 data-testid={CONTACT_IDS.emailLink}
                 className="cursor-hover block font-display text-white text-xl sm:text-2xl hover:text-[#e0231c] transition-colors"
               >
-                {PROFILE.email} ↗
+                {email} ↗
               </a>
               <div className="font-mono text-xs uppercase tracking-[0.2em] text-[#78837c]">
-                {PROFILE.phone} · {PROFILE.location}
+                {phone} · {location}
               </div>
             </div>
 
@@ -232,11 +238,11 @@ export default function Contact() {
         {/* Footer info & copyright */}
         <div className="mt-24 pt-8 border-t border-[rgba(223,231,224,0.08)] flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#78837c]">
-            © {new Date().getFullYear()} Anaita Pal · All rights reserved
+            © {new Date().getFullYear()} {name} · All rights reserved
           </div>
           <div className="flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-[#78837c]">
             <a
-              href="https://www.linkedin.com/in/anaitapal1999/"
+              href={linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#e0231c] transition-colors"
@@ -244,7 +250,7 @@ export default function Contact() {
               LinkedIn ↗
             </a>
             <a
-              href="https://github.com/anaita1999"
+              href={github}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#e0231c] transition-colors"

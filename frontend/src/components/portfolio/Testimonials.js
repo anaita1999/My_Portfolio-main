@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TESTIMONIALS as TEST_DATA } from '@/lib/portfolioData';
 import { TESTIMONIALS as TEST_IDS } from '@/constants/testIds';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 import useSectionView from '@/hooks/useSectionView';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Testimonials() {
+  const { testimonials: TEST_DATA } = usePortfolioContent();
   const [index, setIndex] = useState(0);
   const rootRef = useRef(null);
   const cardRef = useRef(null);
@@ -17,21 +18,17 @@ export default function Testimonials() {
     ScrollTrigger.refresh();
     const ctx = gsap.context(() => {
       gsap.utils.toArray('[data-fade]').forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
+        gsap.from(el, {
+          opacity: 0,
+          y: 25,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
           },
-        );
+        });
       });
     }, rootRef);
     return () => ctx.revert();

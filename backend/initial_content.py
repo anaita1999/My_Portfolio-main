@@ -1,0 +1,376 @@
+"""Default initial content dictionary seeded into MongoDB / in-memory cache.
+Matches the current rich portfolio data tokens and allows dynamic CMS manipulation.
+"""
+
+INITIAL_CONTENT = {
+    "profile": {
+        "name": "Anaita Pal",
+        "role": "Agentic AI Developer · Designer · AI-Automation Creator · Website Developer · Founder of Arisetek IT Solutions",
+        "tagline": "Crafting intuitive, cinematic digital experiences.",
+        "year": "2024",
+        "email": "anaita.pal.cse@gmail.com",
+        "phone": "+91 7980958364",
+        "location": "49, Baidyanath Dutta Sarani, Howrah — 113",
+        "linkedin": "https://www.linkedin.com/in/anaitapal1999/",
+        "bio": "Hello — I'm Anaita Pal, a Computer Science and Engineering graduate from Adamas University, West Bengal. With a strong focus on Agentic AI Systems and UI/UX development, I craft user-friendly, interactive interfaces and autonomous automation pipelines. My toolkit includes Python, React, Three.js, Node.js, Flutter, and Figma.\n\nFounder of Arisetek IT Solutions. Previously interned as a UI/UX Designer and Frontend Developer at Lisica Tech, and worked on fraud and risk analytics at Startek and Netscribes.",
+        "languages": ["Bengali", "Hindi", "English"],
+    },
+    "pricing": {
+        "hourly_rate_inr": "₹2,500 / hr",
+        "hourly_rate_usd": "$35 / hr",
+        "monthly_retainer_inr": "₹1,20,000 / mo",
+        "monthly_retainer_usd": "$1,500 / mo",
+        "budget_pills_inr": ["< ₹1L", "₹1L – ₹3L", "₹3L – ₹6L", "₹6L+"],
+        "budget_pills_usd": ["< $1.2k", "$1.2k – $3.5k", "$3.5k – $7k", "$7k+"],
+        "default_budget_inr": "₹1L – ₹3L",
+        "default_budget_usd": "$1.2k – $3.5k",
+        "packages": [
+            {
+                "id": "starter",
+                "name": "Agentic MVP / Landing Experience",
+                "price_inr": "₹45,000",
+                "price_usd": "$600",
+                "duration": "1-2 weeks",
+                "deliverables": [
+                    "High-performance responsive React/Next.js frontend",
+                    "Custom 3D WebGL / interactive hero effects",
+                    "Contact form & lead capture integration",
+                    "SEO & Core Web Vitals optimization"
+                ]
+            },
+            {
+                "id": "scale",
+                "name": "Full-Stack AI App / Automation",
+                "price_inr": "₹1,20,000",
+                "price_usd": "$1,500",
+                "duration": "3-4 weeks",
+                "deliverables": [
+                    "End-to-end Python FastAPI + React web application",
+                    "Agentic AI workflow / LLM RAG integration",
+                    "Database architecture (MongoDB / PostgreSQL)",
+                    "Authentication, admin portal & cloud deployment"
+                ]
+            },
+            {
+                "id": "enterprise",
+                "name": "Enterprise Retainer / Custom Solution",
+                "price_inr": "₹2,50,000+",
+                "price_usd": "$3,200+",
+                "duration": "Custom monthly",
+                "deliverables": [
+                    "Dedicated AI architecture & system engineering",
+                    "Continuous design iterations & product shipping",
+                    "Priority 24/7 support & infrastructure management",
+                    "Security, fraud audits & performance SLAs"
+                ]
+            }
+        ]
+    },
+    "skills": [
+        {
+            "name": "Agentic AI Systems",
+            "category": "AI Core",
+            "desc": "Multi-agent orchestration, autonomous decision loops, tool-calling pipelines & self-healing LLM chains.",
+            "mastery": "98%",
+        },
+        {
+            "name": "AI Automation Pipelines",
+            "category": "Automation",
+            "desc": "Autonomous workflow execution, enterprise process automation, webhook triggers & integration architectures.",
+            "mastery": "96%",
+        },
+        {
+            "name": "Cognitive & RAG Architecture",
+            "category": "Intelligence",
+            "desc": "Vector embeddings, semantic retrieval, hybrid search, context engineering & private LLM knowledge graphs.",
+            "mastery": "95%",
+        },
+        {
+            "name": "UI/UX Design",
+            "category": "Design",
+            "desc": "Human-AI interface architecture, cognitive UX systems, design tokens & high-fidelity interactive prototypes.",
+            "mastery": "96%",
+        },
+        {
+            "name": "Web Development",
+            "category": "Frontend",
+            "desc": "Modern high-performance web platforms, real-time WebGL, micro-frontends & responsive architectures.",
+            "mastery": "94%",
+        },
+        {
+            "name": "App Development",
+            "category": "Mobile",
+            "desc": "Cross-platform mobile applications with smooth native interactions and offline-first data synchronization.",
+            "mastery": "88%",
+        },
+        {
+            "name": "Node.js",
+            "category": "Backend",
+            "desc": "Event-driven microservices, asynchronous task queues, high-throughput REST APIs & server runtime.",
+            "mastery": "88%",
+        },
+        {
+            "name": "Python",
+            "category": "AI & Data",
+            "desc": "Agentic AI frameworks, async data automation pipelines, model integration & backend algorithms.",
+            "mastery": "96%",
+        },
+        {
+            "name": "HTML / CSS",
+            "category": "Frontend",
+            "desc": "Semantic web structure, advanced CSS grid, canvas shaders & accessible design system components.",
+            "mastery": "98%",
+        },
+        {
+            "name": "Flutter",
+            "category": "Mobile",
+            "desc": "Cross-platform mobile & desktop client applications with reactive state management and clean architecture.",
+            "mastery": "86%",
+        },
+        {
+            "name": "JavaScript",
+            "category": "Frontend",
+            "desc": "Modern ESNext, asynchronous programming, DOM lifecycle manipulation & client-side performance.",
+            "mastery": "94%",
+        },
+        {
+            "name": "React",
+            "category": "Frontend",
+            "desc": "Component architecture, custom hooks, state machines, server components & performance optimization.",
+            "mastery": "95%",
+        },
+    ],
+    "projects": [
+        {
+            "id": "p1",
+            "slug": "antirag",
+            "title": "Anti-Ragging Mobile App",
+            "tagline": "Real-time incident reporting & institutional safety network.",
+            "category": "Mobile App · Flutter",
+            "year": "2024",
+            "featured": True,
+            "color": "#e0231c",
+            "glow": "rgba(224, 35, 28, 0.45)",
+            "emoji": "⛩️",
+            "subtitle": "Sanctuary & Safety Network",
+            "stack": ["Flutter", "Dart", "Firebase", "Figma", "REST API"],
+            "summary": "Campus safety mobile application enabling students to report harassment anonymously with location tracking, emergency SOS, and admin incident dashboards.",
+            "github": "https://github.com/anaita1999",
+            "live": None,
+            "sections": {
+                "overview": "Designed and developed an intuitive, secure emergency reporting application for college campuses. Emphasized speed-of-action and complete anonymity to remove reporting stigma.",
+                "architecture": "Cross-platform Flutter frontend backed by Firebase Auth and real-time Firestore with client-side payload encryption and geo-fenced SOS routing.",
+                "problem": "Students feared retaliation when reporting misconduct through traditional, non-anonymous administrative channels.",
+                "solution": "1-tap encrypted SOS trigger that alerts campus marshals with location telemetry while scrubbing identifiable user metadata.",
+                "metrics": ["< 2s Emergency broadcast latency", "100% Anonymity guarantee", "4.8/5 Student usability score"]
+            }
+        },
+        {
+            "id": "p2",
+            "slug": "fast-meal",
+            "title": "Fast Meal & Gourmet App",
+            "tagline": "Hyperlocal food discovery with micro-interaction UX.",
+            "category": "UI/UX & Mobile · Flutter",
+            "year": "2023",
+            "featured": True,
+            "color": "#ff8c28",
+            "glow": "rgba(255, 140, 40, 0.45)",
+            "emoji": "🍱",
+            "subtitle": "Gourmet Bento & Fast Delivery",
+            "stack": ["Flutter", "Figma", "Node.js", "MongoDB"],
+            "summary": "Fluid food-delivery client interface focusing on visual gastronomy, rapid cart gestures, and live GPS order dispatch tracking.",
+            "github": "https://github.com/anaita1999",
+            "live": None,
+            "sections": {
+                "overview": "A modern food-ordering application crafted with high emphasis on appetizing visual design, zero-friction checkout, and responsive menu animations.",
+                "architecture": "Flutter client communicating with Node.js microservices for cart management and live WebSockets order updates.",
+                "problem": "Existing delivery apps felt cluttered, resulting in high checkout drop-off rates.",
+                "solution": "Streamlined 2-step checkout, haptic feedback, and instant meal customizers.",
+                "metrics": ["35% Faster checkout speed", "60fps Silky animations", "Zero cart calculation latency"]
+            }
+        },
+        {
+            "id": "p3",
+            "slug": "cyberfiction",
+            "title": "Cyberfiction 3D Universe",
+            "tagline": "Interactive metaverse clone with WebGL shaders & scroll physics.",
+            "category": "Creative Dev · Three.js",
+            "year": "2023",
+            "featured": True,
+            "color": "#a05aff",
+            "glow": "rgba(160, 90, 255, 0.45)",
+            "emoji": "🌌",
+            "subtitle": "3D Metaverse Cyber Universe",
+            "stack": ["HTML5 Canvas", "Three.js", "GSAP ScrollTrigger", "CSS Shaders"],
+            "summary": "Futuristic interactive web experience recreating the award-winning Cyberfiction aesthetic with smooth frame-by-frame canvas scrubbing.",
+            "github": "https://github.com/anaita1999",
+            "live": None,
+            "sections": {
+                "overview": "Experimental web project translating complex 3D frame sequences into smooth, performant browser scrolling with dynamic lighting.",
+                "architecture": "Three.js rendering pipeline synchronized to GSAP ScrollTrigger and device refresh rates.",
+                "problem": "High-resolution frame animations frequently suffered from frame-rate drops on mobile devices.",
+                "solution": "Preloaded canvas buffers and adaptive DPR scaling.",
+                "metrics": ["Locked 60/120 FPS", "Zero scroll stutter", "Dynamic lighting shaders"]
+            }
+        },
+        {
+            "id": "p4",
+            "slug": "ai-voice-assistant",
+            "title": "AI Voice & Neural Assistant",
+            "tagline": "Natural language voice assistant with task automation.",
+            "category": "AI Automation · Python",
+            "year": "2024",
+            "featured": True,
+            "color": "#32d278",
+            "glow": "rgba(50, 210, 120, 0.45)",
+            "emoji": "🤖",
+            "subtitle": "Neural Voice & AI Intelligence",
+            "stack": ["Python", "SpeechRecognition", "Pyttsx3", "OpenAI API"],
+            "summary": "Voice-driven automated assistant capable of system control, web research, smart reminders, and context-aware LLM query responses.",
+            "github": "https://github.com/anaita1999",
+            "live": None,
+            "sections": {
+                "overview": "Desktop voice agent integrating speech-to-text synthesis with autonomous desktop workflow commands.",
+                "architecture": "Python asynchronous event loop handling audio streams, NLP intent recognition, and action dispatchers.",
+                "problem": "Manual desktop repetitive workflows took valuable time away from development tasks.",
+                "solution": "Voice-triggered automated workflows for git actions, note taking, and system queries.",
+                "metrics": ["96% Voice accuracy", "< 800ms Response time", "15+ Automated macros"]
+            }
+        }
+    ],
+    "experience": [
+        {
+            "id": "exp-1",
+            "year": "2026 →",
+            "role": "Boom Operator",
+            "company": "Fusion CX",
+            "location": "Howrah",
+            "url": None,
+            "track": "design",
+            "bullets": [
+                "Current role — started May 2026.",
+                "Managing audio and technical operations with rigorous quality standards."
+            ]
+        },
+        {
+            "id": "exp-2",
+            "year": "2025 – 26",
+            "role": "Fraud Analyst",
+            "company": "Startek India",
+            "location": "Kolkata",
+            "url": None,
+            "track": "risk",
+            "bullets": [
+                "Flipkart Fraud and Risk Analyst (Feb 2025 – Jan 2026, 1 year).",
+                "Monitored high-volume e-commerce transactions, detected suspicious patterns, and prevented fraudulent orders."
+            ]
+        },
+        {
+            "id": "exp-3",
+            "year": "2024 – 25",
+            "role": "Fraud Analyst",
+            "company": "Netscribes",
+            "location": "Kolkata",
+            "url": None,
+            "track": "risk",
+            "bullets": [
+                "Fraud And Risk Management Analyst (Jul 2024 – Feb 2025, 8 months).",
+                "Audited merchant behaviors, handled chargeback mitigation, and generated risk assessment reports."
+            ]
+        },
+        {
+            "id": "exp-4",
+            "year": "2023 – 24",
+            "role": "Graphic Designer",
+            "company": "Lisica Tech",
+            "location": "Kolkata, West Bengal, India",
+            "url": "https://lisicatechinternship.netlify.app/",
+            "track": "design",
+            "bullets": [
+                "Graphic Designer (Nov 2023 – Feb 2024, 4 months).",
+                "Created user-friendly, engaging UI mockups and design token assets for web applications."
+            ]
+        },
+        {
+            "id": "exp-5",
+            "year": "2023",
+            "role": "Frontend Web Developer",
+            "company": "Lisica Tech",
+            "location": "Kolkata, West Bengal, India",
+            "url": "https://lisicatechinternship.netlify.app/",
+            "track": "design",
+            "bullets": [
+                "Frontend Web Developer (May 2023 – Jul 2023, 3 months).",
+                "Developed interactive frontend components using modern JavaScript and responsive CSS."
+            ]
+        },
+        {
+            "id": "exp-6",
+            "year": "2023",
+            "role": "Front-End Developer",
+            "company": "National Institute for Industrial Training",
+            "location": "Kolkata",
+            "url": "https://industrialtraining.wiki/",
+            "track": "design",
+            "bullets": [
+                "Actively engaged in creative web design and full-stack development with Node.js.",
+                "Delivered clean, modular components for industrial web training portals."
+            ]
+        }
+    ],
+    "education": [
+        { "id": "edu-1", "year": "2015 – 2016", "level": "Madhyamik (10th)", "school": "Ichapur Boy’s High School", "score": "66%" },
+        { "id": "edu-2", "year": "2018 – 2021", "level": "Diploma CST", "school": "Kingston Polytechnic College (KPC)", "score": "88%" },
+        { "id": "edu-3", "year": "2021 – 2024", "level": "B.Tech CSE", "school": "Adamas University", "score": "58%" },
+        { "id": "edu-4", "year": "2026 – 2028", "level": "MBA · Information Technology", "school": "Manipal University Jaipur", "score": "In progress" }
+    ],
+    "certifications": [
+        {
+            "id": "cert-1",
+            "title": "AWS Academy Graduate — Cloud Foundations",
+            "issuer": "AWS Academy",
+            "year": "2023",
+            "url": "https://www.credly.com/org/amazon-web-services/badge/aws-academy-graduate-aws-academy-cloud-foundations"
+        },
+        {
+            "id": "cert-2",
+            "title": "UI / UX for Beginners",
+            "issuer": "Great Learning Academy",
+            "year": "2023",
+            "url": "https://olympus1.mygreatlearning.com/course_certificates/download.pdf?user_name=UOOWBTGZ"
+        },
+        {
+            "id": "cert-3",
+            "title": "Frontend Development with React",
+            "issuer": "National Institute for Industrial Training",
+            "year": "2023",
+            "url": "https://industrialtraining.wiki/"
+        }
+    ],
+    "testimonials": [
+        {
+            "id": "test-1",
+            "name": "Priyanka Roy",
+            "role": "Lead Product Manager",
+            "company": "Lisica Tech",
+            "quote": "Anaita has an extraordinary eye for digital aesthetics and motion. Her ability to translate complex design ideas into performant, clean frontend code made our product shine.",
+            "rating": 5
+        },
+        {
+            "id": "test-2",
+            "name": "Debanjan Sen",
+            "role": "Operations Lead",
+            "company": "Startek India",
+            "quote": "Sharp analytical mindset with impeccable precision. Anaita handled complex fraud audits and risk mitigation workflows with diligence and high speed.",
+            "rating": 5
+        },
+        {
+            "id": "test-3",
+            "name": "Subhasish Mukherjee",
+            "role": "Tech Founder",
+            "company": "Arisetek Client",
+            "quote": "Working with Anaita was a seamless experience. She built our application from scratch with modern 3D visuals and delivered ahead of schedule.",
+            "rating": 5
+        }
+    ]
+}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PROJECTS as PROJECTS_IDS } from '@/constants/testIds';
-import { PROJECTS } from '@/lib/portfolioData';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 import useSectionView from '@/hooks/useSectionView';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -32,6 +32,7 @@ const PROJECT_EMOJIS = {
 };
 
 export default function Projects() {
+  const { projects: PROJECTS } = usePortfolioContent();
   const rootRef = useRef(null);
   const marqueeRef = useRef(null);
   const viewRef = useSectionView('projects');
@@ -41,41 +42,33 @@ export default function Projects() {
     const ctx = gsap.context(() => {
       // Fade in chapter headlines
       gsap.utils.toArray('[data-fade]').forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
+        gsap.from(el, {
+          opacity: 0,
+          y: 25,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
           },
-        );
+        });
       });
 
       // Staggered reveal for cards
       gsap.utils.toArray('[data-project-card]').forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: (i % 2) * 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
+        gsap.from(card, {
+          opacity: 0,
+          y: 25,
+          duration: 0.8,
+          delay: (i % 2) * 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
           },
-        );
+        });
       });
 
       // Infinite smooth horizontal marquee

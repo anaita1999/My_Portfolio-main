@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { EXPERIENCE as EXP_DATA } from '@/lib/portfolioData';
 import { EXPERIENCE as EXP_IDS } from '@/constants/testIds';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 import { track as trackEvent } from '@/lib/analytics';
 import useSectionView from '@/hooks/useSectionView';
 
@@ -17,34 +17,31 @@ const FILTERS = [
 ];
 
 export default function Experience() {
+  const { experience: EXP_DATA } = usePortfolioContent();
   const rootRef = useRef(null);
   const viewRef = useSectionView('experience');
   const [filter, setFilter] = useState('all');
 
   const filtered = useMemo(() => {
-    if (filter === 'all') return EXP_DATA;
-    return EXP_DATA.filter((e) => e.track === filter);
-  }, [filter]);
+    if (filter === 'all') return EXP_DATA || [];
+    return (EXP_DATA || []).filter((e) => e.track === filter);
+  }, [filter, EXP_DATA]);
 
   useEffect(() => {
     ScrollTrigger.refresh();
     const ctx = gsap.context(() => {
       gsap.utils.toArray('[data-fade]').forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
+        gsap.from(el, {
+          opacity: 0,
+          y: 25,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
           },
-        );
+        });
       });
     }, rootRef);
     return () => ctx.revert();

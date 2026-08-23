@@ -21,7 +21,11 @@ import Footer from '@/components/portfolio/Footer';
 import HireMeWidget from '@/components/portfolio/HireMeWidget';
 import ShareWidget from '@/components/portfolio/ShareWidget';
 import CaseStudy from '@/pages/CaseStudy';
+import AdminLogin from '@/pages/admin/AdminLogin';
+import AdminDashboard from '@/pages/admin/AdminDashboard';
 import { track } from '@/lib/analytics';
+import { PortfolioContentProvider } from '@/context/PortfolioContentContext';
+import { AdminAuthProvider } from '@/context/AdminAuthContext';
 
 function Portfolio() {
   useLenisScroll();
@@ -97,6 +101,8 @@ function AppShell() {
       <Routes>
         <Route path="/" element={<Portfolio />} />
         <Route path="/work/:slug" element={<CaseStudyPage />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </>
   );
@@ -104,9 +110,13 @@ function AppShell() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppShell />
-    </BrowserRouter>
+    <PortfolioContentProvider>
+      <AdminAuthProvider>
+        <BrowserRouter>
+          <AppShell />
+        </BrowserRouter>
+      </AdminAuthProvider>
+    </PortfolioContentProvider>
   );
 }
 

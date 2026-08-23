@@ -1,6 +1,11 @@
-import { PROFILE } from '@/lib/portfolioData';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 
 export default function Footer() {
+  const { profile: dynamicProfile } = usePortfolioContent();
+  const PROFILE = dynamicProfile || {};
+  const name = PROFILE.name || 'Anaita Pal';
+  const year = PROFILE.year || '2024';
+
   return (
     <footer
       style={{
@@ -13,7 +18,7 @@ export default function Footer() {
     >
       <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 px-2 sm:px-6">
         <div className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#78837c]">
-          © {PROFILE.name} · {PROFILE.year} — All rights reserved
+          © {name} · {year} — All rights reserved
         </div>
         <div className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#78837c] flex items-center gap-4">
           <span>Three.js WebGL · Procedural World · GSAP Motion</span>
