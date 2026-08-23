@@ -1,5 +1,3 @@
-// Content sourced from https://boylegend.my.canva.site/anaita-pal-portfolio
-
 export const PROFILE = {
   name: 'Anaita Pal',
   role: 'Agentic AI Developer · Designer · AI-Automation Creator · Website Developer · Founder of Arisetek IT Solutions',

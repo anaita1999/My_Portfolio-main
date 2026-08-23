@@ -301,7 +301,7 @@ export default function HireMeWidget() {
                       required
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      placeholder="e.g. Alex Vance"
+                      placeholder="e.g. John Doe"
                       className="w-full bg-[rgba(5,7,10,0.6)] border border-[rgba(223,231,224,0.12)] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#e0231c] transition-colors"
                     />
                   </div>
@@ -316,7 +316,7 @@ export default function HireMeWidget() {
                       required
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      placeholder="alex@company.com"
+                      placeholder="john@example.com"
                       className="w-full bg-[rgba(5,7,10,0.6)] border border-[rgba(223,231,224,0.12)] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#e0231c] transition-colors"
                     />
                   </div>

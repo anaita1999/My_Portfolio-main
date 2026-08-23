@@ -172,7 +172,7 @@ export default function Contact() {
                   value={form.name}
                   onChange={handleChange}
                   data-testid={CONTACT_IDS.nameInput}
-                  placeholder="e.g. Alex Vance"
+                  placeholder="e.g. John Doe"
                   className="w-full px-4 py-3.5 rounded-xl bg-[rgba(223,231,224,0.03)] border border-[rgba(223,231,224,0.12)] text-white text-sm focus:outline-none focus:border-[#e0231c] transition-colors placeholder:text-[#4a544e]"
                 />
               </div>
@@ -192,7 +192,7 @@ export default function Contact() {
                   value={form.email}
                   onChange={handleChange}
                   data-testid={CONTACT_IDS.emailInput}
-                  placeholder="alex@company.com"
+                  placeholder="john@example.com"
                   className="w-full px-4 py-3.5 rounded-xl bg-[rgba(223,231,224,0.03)] border border-[rgba(223,231,224,0.12)] text-white text-sm focus:outline-none focus:border-[#e0231c] transition-colors placeholder:text-[#4a544e]"
                 />
               </div>
@@ -236,7 +236,7 @@ export default function Contact() {
           </div>
           <div className="flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-[#78837c]">
             <a
-              href="https://linkedin.com/in/anaita-pal"
+              href="https://www.linkedin.com/in/anaitapal1999/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#e0231c] transition-colors"
@@ -244,7 +244,7 @@ export default function Contact() {
               LinkedIn ↗
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/anaita1999"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#e0231c] transition-colors"
