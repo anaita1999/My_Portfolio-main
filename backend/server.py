@@ -559,13 +559,17 @@ async def admin_list_contacts(admin_payload: Dict[str, Any] = Depends(get_curren
         contacts = await db.contacts.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
     except Exception:
         contacts = list(reversed(_mem_contacts))
+    clean_contacts = []
     for c in contacts:
-        if isinstance(c.get('created_at'), str):
+        doc = dict(c)
+        doc.pop("_id", None)
+        if isinstance(doc.get('created_at'), str):
             try:
-                c['created_at'] = datetime.fromisoformat(c['created_at'])
+                doc['created_at'] = datetime.fromisoformat(doc['created_at'])
             except Exception:
                 pass
-    return contacts
+        clean_contacts.append(doc)
+    return clean_contacts
 
 
 @api_router.delete("/admin/contacts/{contact_id}")
@@ -590,13 +594,17 @@ async def admin_list_leads(admin_payload: Dict[str, Any] = Depends(get_current_a
         leads = await db.hire_leads.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
     except Exception:
         leads = list(reversed(_mem_hire_leads))
+    clean_leads = []
     for lead in leads:
-        if isinstance(lead.get('created_at'), str):
+        doc = dict(lead)
+        doc.pop("_id", None)
+        if isinstance(doc.get('created_at'), str):
             try:
-                lead['created_at'] = datetime.fromisoformat(lead['created_at'])
+                doc['created_at'] = datetime.fromisoformat(doc['created_at'])
             except Exception:
                 pass
-    return leads
+        clean_leads.append(doc)
+    return clean_leads
 
 
 @api_router.delete("/admin/leads/{lead_id}")
