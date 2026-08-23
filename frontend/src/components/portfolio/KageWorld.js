@@ -1469,6 +1469,62 @@ export default function KageWorld() {
     };
     window.addEventListener('mousemove', onMouseMove, { passive: true });
 
+    // --- Mobile Gyroscope (DeviceOrientation) & Touch Parallax ---
+    let gyroActive = false;
+
+    const onDeviceOrientation = (e) => {
+      if (e.gamma !== null && e.beta !== null) {
+        gyroActive = true;
+        // Gamma: roll tilt left/right (-28 to +28 deg mapped to [-1, 1])
+        const normX = Math.max(-1, Math.min(1, e.gamma / 28));
+        // Beta: pitch tilt forward/backward (calibrated around natural 50 deg upright hand-holding angle)
+        const normY = Math.max(-1, Math.min(1, (e.beta - 50) / 25));
+
+        mouse.targetX = normX;
+        mouse.targetY = -normY;
+      }
+    };
+
+    // Auto-request iOS 13+ device orientation permission on first touch interaction
+    const requestOrientationPermission = () => {
+      if (
+        typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function'
+      ) {
+        DeviceOrientationEvent.requestPermission()
+          .then((permissionState) => {
+            if (permissionState === 'granted') {
+              window.addEventListener('deviceorientation', onDeviceOrientation, { passive: true });
+            }
+          })
+          .catch(() => {});
+      }
+    };
+
+    // Standard Android & Chromium orientation listener (works automatically)
+    window.addEventListener('deviceorientation', onDeviceOrientation, { passive: true });
+    window.addEventListener('touchstart', requestOrientationPermission, { passive: true, once: true });
+
+    // Touch Swipe fallback for devices without motion sensors
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const onTouchStart = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    };
+    const onTouchMove = (e) => {
+      if (!gyroActive && e.touches && e.touches.length > 0) {
+        const deltaX = (e.touches[0].clientX - touchStartX) / window.innerWidth;
+        const deltaY = (e.touches[0].clientY - touchStartY) / window.innerHeight;
+        mouse.targetX = Math.max(-1, Math.min(1, deltaX * 3.0));
+        mouse.targetY = Math.max(-1, Math.min(1, -deltaY * 3.0));
+      }
+    };
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+
     const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -1579,6 +1635,10 @@ export default function KageWorld() {
       cancelAnimationFrame(animId);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('deviceorientation', onDeviceOrientation);
+      window.removeEventListener('touchstart', requestOrientationPermission);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('resize', onResize);
 
       // Clean texture & geometry disposal
