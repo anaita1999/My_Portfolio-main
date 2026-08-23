@@ -52,38 +52,22 @@ export default function Hero() {
 
   const NAME_LETTERS = ['A', 'N', 'A', 'I', 'T', 'A', '·', 'P', 'A', 'L'];
 
-  // Track height is 2.5x viewport height for smooth, luxurious sequential pacing
-  const trackHeight = viewportH * 2.5;
+  // Track height is 1.35x viewport height for brisk, fast-paced scroll progression
+  const trackHeight = viewportH * 1.35;
   const pinDistance = trackHeight - viewportH;
   const isPinned = scrollY < pinDistance;
 
   // Normalized scroll progress (0.0 to 1.0)
-  const progress = Math.min(1, Math.max(0, scrollY / (pinDistance * 0.9)));
+  const progress = Math.min(1, Math.max(0, scrollY / (pinDistance * 0.85 || 1)));
 
-  // --- Strict One-by-One Sequential Staggered Animations ---
-  // Element 1: Headline emerges first (0.04 -> 0.22)
-  const headlineAlpha = Math.max(0, Math.min(1, (progress - 0.04) / 0.18));
-
-  // Element 2: Bottom Spaced Name emerges second (0.20 -> 0.38)
-  const nameAlpha = Math.max(0, Math.min(1, (progress - 0.20) / 0.18));
-
-  // Element 3: Role & Mission description emerges third (0.36 -> 0.54)
-  const roleAlpha = Math.max(0, Math.min(1, (progress - 0.36) / 0.18));
-
-  // Element 4: Top-Right Badges emerge fourth (0.52 -> 0.74, staggered individually)
-  const getBadgeAlpha = (index) => {
-    const start = 0.52 + index * 0.04;
-    return Math.max(0, Math.min(1, (progress - start) / 0.1));
-  };
-
-  // Element 5: Action CTA & Chapter Chips emerge fifth (0.72 -> 0.90)
-  const ctaAlpha = Math.max(0, Math.min(1, (progress - 0.72) / 0.18));
-
-  // Pure initial landing hint (visible only at scroll = 0)
-  const initialHintAlpha = Math.max(0, 1 - progress * 8);
+  // Fast, crisp animation reveals
+  const headlineAlpha = Math.max(0, Math.min(1, (progress - 0.02) / 0.12));
+  const nameAlpha = Math.max(0, Math.min(1, (progress - 0.10) / 0.14));
+  const badgeAlpha = Math.max(0, Math.min(1, (progress - 0.18) / 0.14));
+  const ctaAlpha = Math.max(0, Math.min(1, (progress - 0.35) / 0.16));
+  const initialHintAlpha = Math.max(0, 1 - progress * 10);
 
   return (
-    // Outer scroll track container that provides scroll space for the pinned intro
     <section
       id="home"
       data-testid={HERO.root}
@@ -97,11 +81,6 @@ export default function Hero() {
         background: 'transparent',
       }}
     >
-      {/* 
-        Fixed/Pinned Inner Frame:
-        Locked at top: 0 with position: fixed while scroll is within pinDistance.
-        Guarantees all elements are 100% stationary and only reveal one by one in place.
-      */}
       <div
         style={{
           position: isPinned ? 'fixed' : 'absolute',
@@ -132,14 +111,14 @@ export default function Hero() {
           }}
         />
 
-        {/* Top Container: Left Headline/Role + Right Badges Stack */}
+        {/* Top Container: Left Headline + Badges placed right below it */}
         <div
           className="relative z-10 max-w-[1440px] w-full mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-start md:justify-between gap-6"
           style={{ paddingTop: 'clamp(85px, 12vh, 125px)' }}
         >
-          {/* Left Column: Eyebrow, Headline, Role & CTA */}
+          {/* Left Column: Eyebrow, Headline & Discipline Badges */}
           <div className="max-w-2xl flex-1">
-            {/* 1. Chapter 00 Eyebrow (Element 1) */}
+            {/* 1. Chapter 00 Eyebrow */}
             <div
               className="mb-4 flex items-center gap-3 transition-opacity duration-200"
               style={{
@@ -173,141 +152,60 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* 1. Headline (Element 1: Thin Where Craft, Bold Italic Reveals The Intelligence) */}
+            {/* 2. Refined Typography with Continuous Shimmer Animations (Borderless) */}
             <div
-              className="transition-opacity duration-200"
+              className="transition-opacity duration-200 max-w-xl"
               style={{
                 opacity: headlineAlpha,
                 pointerEvents: headlineAlpha > 0.2 ? 'auto' : 'none',
               }}
             >
-              <div className="font-display uppercase tracking-tight" style={{ letterSpacing: '-0.02em' }}>
-                {/* WHERE CRAFT: Thin font weight, smaller size, crisp white */}
-                <div
-                  className="font-light text-[#ffffff]"
+              {/* Line 1: WHERE CRAFT */}
+              <div className="flex items-center gap-3 mb-2.5">
+                <span
                   style={{
-                    fontSize: 'clamp(20px, 2.5vw, 34px)',
-                    lineHeight: 1.1,
-                    fontWeight: 300,
-                    textShadow: '0 2px 14px rgba(0,0,0,0.85)',
-                    letterSpacing: '0.02em',
+                    width: 7,
+                    height: 7,
+                    borderRadius: '50%',
+                    background: '#ff3322',
+                    boxShadow: '0 0 10px #ff3322',
+                    display: 'inline-block',
                   }}
-                >
+                />
+                <span className="font-mono text-xs sm:text-sm tracking-[0.32em] uppercase font-bold text-[#dfe7e0]">
                   Where Craft
-                </div>
+                </span>
+                <div className="flex-1 h-[1px] bg-gradient-to-r from-[rgba(255,51,34,0.6)] via-[rgba(223,231,224,0.2)] to-transparent" />
+              </div>
 
-                {/* REVEALS THE: Bold & Italic, larger size, crisp white */}
-                <div
-                  className="font-extrabold italic text-[#ffffff]"
-                  style={{
-                    fontSize: 'clamp(32px, 4.8vw, 64px)',
-                    lineHeight: 1.02,
-                    fontWeight: 800,
-                    textShadow: '0 2px 24px rgba(0,0,0,0.9)',
-                  }}
-                >
-                  Reveals The{' '}
-                  {/* INTELLIGENCE.: Bold & Italic, radiant glowing vermilion */}
-                  <span
-                    style={{
-                      color: '#ff3322',
-                      textShadow: '0 0 28px rgba(255, 51, 34, 0.75), 0 0 60px rgba(224, 35, 28, 0.4)',
-                    }}
-                  >
-                    Intelligence
-                  </span>
-                  <span style={{ color: '#ff3322' }}>.</span>
-                </div>
+              {/* Line 2: REVEALS THE */}
+              <div className="font-display font-black italic uppercase tracking-tight text-white leading-none text-[clamp(28px,4.5vw,58px)]">
+                <span className="shimmer-text-silver drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
+                  Reveals The
+                </span>
+              </div>
+
+              {/* Line 3: INTELLIGENCE. */}
+              <div className="font-display font-black italic uppercase tracking-tight leading-none text-[clamp(32px,5.2vw,70px)] mt-2">
+                <span className="shimmer-text-vermilion drop-shadow-[0_0_28px_rgba(255,51,34,0.7)]">
+                  Intelligence
+                </span>
+                <span className="text-[#ff3322] drop-shadow-[0_0_14px_#ff3322]">.</span>
               </div>
             </div>
 
-            {/* 3. Role & Mission (Element 3: Emerges after Name) */}
+            {/* 3. Badges moved right here instead of text lines */}
             <div
-              className="mt-4 space-y-2 transition-opacity duration-200"
+              className="mt-6 flex flex-wrap items-center gap-2.5 max-w-xl transition-opacity duration-200"
               style={{
-                opacity: roleAlpha,
-                pointerEvents: roleAlpha > 0.2 ? 'auto' : 'none',
+                opacity: badgeAlpha,
+                pointerEvents: badgeAlpha > 0.2 ? 'auto' : 'none',
               }}
             >
-              <div
-                className="text-[#ffffff] text-base sm:text-lg leading-relaxed font-medium space-y-1.5"
-                style={{
-                  letterSpacing: '-0.01em',
-                  textShadow: '0 2px 14px rgba(0,0,0,0.9)',
-                }}
-              >
-                {/* Line 1: Agentic AI Developer . Designer . AI-Automation Creator */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <span style={{ color: '#ff3b30', textShadow: '0 0 14px rgba(255,59,48,0.5)' }}>
-                    Agentic AI Developer
-                  </span>
-                  <span className="text-[#e0231c] font-bold">·</span>
-                  <span style={{ color: '#ffffff' }}>Designer</span>
-                  <span className="text-[#e0231c] font-bold">·</span>
-                  <span style={{ color: '#ff7744', textShadow: '0 0 14px rgba(255,119,68,0.5)' }}>
-                    AI-Automation Creator
-                  </span>
-                </div>
-
-                {/* Line 2: Website Developer */}
-                <div style={{ color: '#dfe7e0' }}>
-                  Website Developer
-                </div>
-
-                {/* Line 3: Founder of Arisetek IT Solutions */}
-                <div>
-                  <span style={{ color: '#ffd15c', textShadow: '0 0 16px rgba(255,209,92,0.45)' }}>
-                    Founder of Arisetek IT Solutions
-                  </span>
-                </div>
-              </div>
-
-              <p
-                className="text-[#d5e0d8] text-xs sm:text-sm leading-relaxed max-w-xl font-light"
-                style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9)' }}
-              >
-                Crafting intuitive, cinematic digital experiences rendered in real-time WebGL, procedural architecture,
-                and agentic AI systems.
-              </p>
-
-              {/* 5. Action CTA Button (Element 5) */}
-              <div
-                className="pt-2 transition-opacity duration-200"
-                style={{
-                  opacity: ctaAlpha,
-                  pointerEvents: ctaAlpha > 0.2 ? 'auto' : 'none',
-                }}
-              >
-                <a
-                  href="#projects"
-                  onClick={scrollTo('projects')}
-                  data-testid={HERO.ctaProjects}
-                  className="cursor-hover group inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#dfe7e0] text-[#05070a] rounded-full font-display text-xs font-bold uppercase tracking-[0.06em] shadow-[0_8px_28px_rgba(223,231,224,0.25)] transition-all duration-300 hover:bg-[#e0231c] hover:text-white hover:shadow-[0_12px_36px_rgba(224,35,28,0.5)]"
-                >
-                  View selected work
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                    <path d="M5 12h14M13 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* 4. Top-Right Corner: Discipline Badges Stack (Element 4) */}
-          <div className="flex flex-wrap md:flex-col md:items-end gap-2.5 max-w-md">
-            {BADGES.map((b, i) => {
-              const bAlpha = getBadgeAlpha(i);
-              return (
-                <div
-                  key={b.label}
-                  className="transition-opacity duration-200"
-                  style={{
-                    opacity: bAlpha,
-                    pointerEvents: bAlpha > 0.2 ? 'auto' : 'none',
-                  }}
-                >
+              {BADGES.map((b) => (
+                <div key={b.label}>
                   <span
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-[10px] uppercase tracking-[0.16em] font-semibold transition-all duration-300"
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.16em] font-semibold transition-all duration-300 hover:scale-105"
                     style={{
                       background: b.bg,
                       color: b.color,
@@ -330,12 +228,12 @@ export default function Hero() {
                     {b.label}
                   </span>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* 2. Lower Third: Iconic Spaced Display Title "A N A I T A · P A L" (Element 2: Emerges second) */}
+        {/* Lower Third: Iconic Spaced Display Title "A N A I T A · P A L" */}
         <div
           className="relative z-10 max-w-[1440px] w-full mx-auto px-4 md:px-8 pb-6 transition-opacity duration-200"
           style={{
@@ -368,7 +266,7 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* 5. Bottom Bar: Chapter Nav Chips (01 02 03 04) & Scroll Cue (Element 5) */}
+          {/* Bottom Bar: Chapter Nav Chips (01 02 03 04) & Scroll Cue */}
           <div
             className="mt-4 pt-4 border-t border-[rgba(223,231,224,0.15)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-opacity duration-200"
             style={{
@@ -376,7 +274,6 @@ export default function Hero() {
               pointerEvents: ctaAlpha > 0.2 ? 'auto' : 'none',
             }}
           >
-            {/* Chapter Quick Jump Numbers */}
             <div className="flex items-center gap-6 sm:gap-10">
               {CHAPTER_CHIPS.map((c) => (
                 <a
@@ -395,7 +292,6 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* Scroll Cue */}
             <div
               data-testid={HERO.scrollCue}
               className="flex items-center gap-3"

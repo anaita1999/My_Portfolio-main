@@ -30,12 +30,12 @@ function createNormalMapFromHeight(heightCanvas, strength = 1.4) {
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       const tl = getH(x - 1, y - 1);
-      const t  = getH(x,     y - 1);
+      const t = getH(x, y - 1);
       const tr = getH(x + 1, y - 1);
-      const l  = getH(x - 1, y);
-      const r  = getH(x + 1, y);
+      const l = getH(x - 1, y);
+      const r = getH(x + 1, y);
       const bl = getH(x - 1, y + 1);
-      const b  = getH(x,     y + 1);
+      const b = getH(x, y + 1);
       const br = getH(x + 1, y + 1);
 
       const dx = (tr + 2.0 * r + br) - (tl + 2.0 * l + bl);
@@ -48,7 +48,7 @@ function createNormalMapFromHeight(heightCanvas, strength = 1.4) {
       const nz = (dz / len) * 0.5 + 0.5;
 
       const idx = (y * width + x) * 4;
-      dstData[idx]     = Math.floor(nx * 255);
+      dstData[idx] = Math.floor(nx * 255);
       dstData[idx + 1] = Math.floor(ny * 255);
       dstData[idx + 2] = Math.floor(nz * 255);
       dstData[idx + 3] = 255;
@@ -1026,7 +1026,7 @@ export default function KageWorld() {
           vec2 center = vUv - 0.5;
           float dist = length(center) * 2.0;
           if (dist > 1.0) discard;
-          float alpha = pow(1.0 - dist, 2.0) * 0.82;
+          float alpha = pow(1.0 - dist, 2.0) * 0.85;
           vec3 col = mix(uInnerColor, uColor, smoothstep(0.08, 0.62, dist));
           gl_FragColor = vec4(col, alpha);
         }
@@ -1037,7 +1037,7 @@ export default function KageWorld() {
     moonGroup.add(coronaMesh);
     scene.add(moonGroup);
 
-    // --- 2. Central Temple Castle Sanmon Pavilion ---
+    // --- 2. Central Temple Castle & Deep Mountain Pagodas ---
     function createSanmon(x, y, z, scale = 1, rotationY = 0) {
       const pavilion = new THREE.Group();
       pavilion.position.set(x, y, z);
@@ -1125,10 +1125,12 @@ export default function KageWorld() {
       return pavilion;
     }
 
-    createSanmon(0, 0, -20.0, 1.25, 0);
-    createSanmon(-14.0, 2.0, -36.0, 1.15, 0.4);
+    createSanmon(0, 0, -24.0, 1.25, 0);
+    createSanmon(-16.0, 2.2, -38.0, 1.15, 0.35);
+    createSanmon(16.0, 3.0, -46.0, 1.2, -0.35);
+    createSanmon(0, 5.0, -58.0, 1.45, 0);
 
-    // --- 3. Torii Gate on the Approach ---
+    // --- 3. Deep Torii Gates Sequence along Mountain Approach ---
     function createTorii(x, y, z, scale = 1, rotationY = 0) {
       const torii = new THREE.Group();
       torii.position.set(x, y, z);
@@ -1206,10 +1208,12 @@ export default function KageWorld() {
     }
 
     createTorii(0, 0, 4.0, 1.15, 0);
-    createTorii(2.0, 0.8, -8.0, 1.25, 0.1);
-    createTorii(-2.2, 1.8, -16.0, 1.35, -0.12);
+    createTorii(1.8, 0.8, -8.0, 1.25, 0.08);
+    createTorii(-2.0, 1.6, -18.0, 1.35, -0.1);
+    createTorii(0, 2.8, -32.0, 1.5, 0.0);
+    createTorii(0, 4.2, -45.0, 1.65, 0.0);
 
-    // --- 4. Stone Lanterns (Tōrō) with Glowing Fire ---
+    // --- 4. Deep Stone Lanterns (Tōrō) Array ---
     const lanterns = [];
     function createLantern(x, y, z, scale = 0.85) {
       const lantern = new THREE.Group();
@@ -1261,7 +1265,7 @@ export default function KageWorld() {
       lantern.add(kiso, sao, chudai, hibukuro, fireCore, kasa, hoju);
 
       // Warm point light with soft shadow illumination
-      const pLight = new THREE.PointLight(0xff8833, 2.2, 12, 1.5);
+      const pLight = new THREE.PointLight(0xff8833, 2.2, 14, 1.5);
       pLight.position.set(x, y + 2.05 * scale, z);
       scene.add(pLight);
 
@@ -1270,19 +1274,27 @@ export default function KageWorld() {
       return lantern;
     }
 
-    createLantern(-3.2, 0, 11.0, 0.88);
-    createLantern(3.2, 0, 11.0, 0.88);
-    createLantern(-3.0, 0, 4.5, 0.88);
-    createLantern(3.0, 0, 4.5, 0.88);
+    createLantern(-3.2, 0, 12.0, 0.88);
+    createLantern(3.2, 0, 12.0, 0.88);
+    createLantern(-3.0, 0, 5.0, 0.88);
+    createLantern(3.0, 0, 5.0, 0.88);
     createLantern(-3.4, 0.4, -2.5, 0.92);
     createLantern(3.4, 0.4, -2.5, 0.92);
     createLantern(-3.8, 0.8, -9.5, 0.98);
     createLantern(3.8, 0.8, -9.5, 0.98);
-    createLantern(-2.6, 1.6, -16.0, 1.05);
-    createLantern(2.6, 1.6, -16.0, 1.05);
+    createLantern(-2.8, 1.5, -17.0, 1.05);
+    createLantern(2.8, 1.5, -17.0, 1.05);
+    createLantern(-3.4, 2.3, -25.0, 1.1);
+    createLantern(3.4, 2.3, -25.0, 1.1);
+    createLantern(-3.8, 3.2, -33.5, 1.15);
+    createLantern(3.8, 3.2, -33.5, 1.15);
+    createLantern(-4.2, 4.0, -42.0, 1.2);
+    createLantern(4.2, 4.0, -42.0, 1.2);
+    createLantern(-4.5, 4.8, -50.0, 1.25);
+    createLantern(4.5, 4.8, -50.0, 1.25);
 
-    // --- 5. Ground Terrain & Beveled Stone Floor Path ---
-    const groundGeo = new THREE.PlaneGeometry(90, 140, 32, 32);
+    // --- 5. Extended Ground Terrain & Beveled Stone Floor Path ---
+    const groundGeo = new THREE.PlaneGeometry(120, 220, 32, 32);
     const groundMat = new THREE.MeshStandardMaterial({
       color: 0x070b10,
       map: floorTextures.mapTex,
@@ -1293,27 +1305,27 @@ export default function KageWorld() {
     });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
-    ground.position.set(0, -0.05, -20);
+    ground.position.set(0, -0.05, -35);
     ground.receiveShadow = true;
     scene.add(ground);
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 40; i++) {
       const pathTile = new THREE.Mesh(
-        new THREE.BoxGeometry(2.6, 0.09, 1.5),
+        new THREE.BoxGeometry(2.6, 0.09, 1.6),
         floorMat,
       );
       pathTile.position.set(
-        Math.sin(i * 0.25) * 0.2,
-        0.02,
-        14 - i * 1.8,
+        Math.sin(i * 0.22) * 0.22,
+        0.02 + i * 0.035,
+        16 - i * 1.7,
       );
       pathTile.receiveShadow = true;
       pathTile.castShadow = true;
       scene.add(pathTile);
     }
 
-    // --- 6. Realistic 3D Sakura Petals (Red + Golden Amber Layers) ---
-    const petalCount = 500;
+    // --- 6. Realistic 3D Sakura Petals (Full Perspective Depth) ---
+    const petalCount = 700;
     const petalGeo = createSakuraPetalGeometry();
 
     const sakuraColors = [
@@ -1344,9 +1356,9 @@ export default function KageWorld() {
     const petalData = [];
 
     for (let i = 0; i < petalCount; i++) {
-      const x = (Math.random() - 0.5) * 38;
-      const y = Math.random() * 22 + 0.5;
-      const z = Math.random() * -60 + 16;
+      const x = (Math.random() - 0.5) * 44;
+      const y = Math.random() * 26 + 0.5;
+      const z = Math.random() * -85 + 20;
       const rx = Math.random() * Math.PI * 2;
       const ry = Math.random() * Math.PI * 2;
       const rz = Math.random() * Math.PI * 2;
@@ -1378,15 +1390,15 @@ export default function KageWorld() {
     instancedPetals.instanceMatrix.needsUpdate = true;
     scene.add(instancedPetals);
 
-    // --- 7. Bioluminescent Fireflies / Tiny Glowing Insects (Hotaru 萤) ---
-    const fireflyCount = 180;
+    // --- 7. Bioluminescent Fireflies / Tiny Insects (Deep Space Distribution) ---
+    const fireflyCount = 220;
     const fireflyPositions = new Float32Array(fireflyCount * 3);
     const fireflyData = [];
 
     for (let i = 0; i < fireflyCount; i++) {
-      const x = (Math.random() - 0.5) * 26;
-      const y = Math.random() * 12 + 0.3;
-      const z = Math.random() * -45 + 12;
+      const x = (Math.random() - 0.5) * 32;
+      const y = Math.random() * 14 + 0.3;
+      const z = Math.random() * -75 + 18;
       fireflyPositions[i * 3] = x;
       fireflyPositions[i * 3 + 1] = y;
       fireflyPositions[i * 3 + 2] = z;
@@ -1416,17 +1428,17 @@ export default function KageWorld() {
     const fireflyPoints = new THREE.Points(fireflyGeo, fireflyMat);
     scene.add(fireflyPoints);
 
-    // --- 8. Spline Camera Path across Chapters (Exact Coordinates) ---
+    // --- 8. Deep Spline Camera Flight Path Across All Chapters ---
     const splinePoints = [
-      { p: 0.0,  pos: new THREE.Vector3(0, 3.2, 19.5),     look: new THREE.Vector3(0, 3.4, -20.0) },
-      { p: 0.16, pos: new THREE.Vector3(0, 3.0, 18.0),     look: new THREE.Vector3(0, 3.4, -20.0) },
-      { p: 0.28, pos: new THREE.Vector3(0.6, 2.6, 10.0),   look: new THREE.Vector3(0, 3.2, -18.0) },
-      { p: 0.40, pos: new THREE.Vector3(-1.2, 2.2, 2.5),   look: new THREE.Vector3(0.3, 2.8, -16.0) },
-      { p: 0.54, pos: new THREE.Vector3(1.2, 1.9, -4.5),   look: new THREE.Vector3(-0.4, 2.6, -18.0) },
-      { p: 0.68, pos: new THREE.Vector3(-0.8, 2.4, -10.5), look: new THREE.Vector3(0.2, 3.0, -22.0) },
-      { p: 0.80, pos: new THREE.Vector3(1.0, 3.2, -15.5),  look: new THREE.Vector3(-0.2, 3.4, -26.0) },
-      { p: 0.90, pos: new THREE.Vector3(-0.6, 3.6, -19.5), look: new THREE.Vector3(0, 3.8, -30.0) },
-      { p: 1.0,  pos: new THREE.Vector3(0, 4.2, -23.5),    look: new THREE.Vector3(0, 4.8, -42.0) },
+      { p: 0.00, pos: new THREE.Vector3(0, 3.2, 20.0),    look: new THREE.Vector3(0, 3.4, -22.0) },
+      { p: 0.12, pos: new THREE.Vector3(0, 3.0, 13.0),    look: new THREE.Vector3(0, 3.4, -22.0) },
+      { p: 0.24, pos: new THREE.Vector3(0.9, 2.6, 5.0),   look: new THREE.Vector3(0, 3.2, -20.0) },
+      { p: 0.38, pos: new THREE.Vector3(-1.1, 2.3, -3.5),  look: new THREE.Vector3(0.3, 2.8, -18.0) },
+      { p: 0.50, pos: new THREE.Vector3(0.8, 2.4, -12.0),  look: new THREE.Vector3(-0.3, 2.8, -22.0) },
+      { p: 0.64, pos: new THREE.Vector3(0.0, 3.0, -20.5),  look: new THREE.Vector3(0.1, 3.2, -28.0) },
+      { p: 0.76, pos: new THREE.Vector3(-1.4, 3.8, -29.0), look: new THREE.Vector3(0.2, 3.8, -36.0) },
+      { p: 0.88, pos: new THREE.Vector3(0.9, 4.6, -38.5),  look: new THREE.Vector3(-0.1, 4.4, -48.0) },
+      { p: 1.00, pos: new THREE.Vector3(0, 5.8, -48.0),   look: new THREE.Vector3(0, 8.5, -78.0) },
     ];
 
     function getInterpolatedCamera(progress) {
@@ -1497,7 +1509,7 @@ export default function KageWorld() {
               window.addEventListener('deviceorientation', onDeviceOrientation, { passive: true });
             }
           })
-          .catch(() => {});
+          .catch(() => { });
       }
     };
 
@@ -1540,7 +1552,7 @@ export default function KageWorld() {
       const delta = clock.getDelta();
       const elapsed = clock.getElapsedTime();
 
-      scrollProgress += (targetScrollProgress - scrollProgress) * (1 - Math.exp(-8 * delta));
+      scrollProgress += (targetScrollProgress - scrollProgress) * (1 - Math.exp(-18 * delta));
       mouse.x += (mouse.targetX - mouse.x) * (1 - Math.exp(-6 * delta));
       mouse.y += (mouse.targetY - mouse.y) * (1 - Math.exp(-6 * delta));
 
@@ -1553,8 +1565,8 @@ export default function KageWorld() {
         new THREE.Vector3(mouse.x * 0.48, mouse.y * 0.32, 0),
       );
 
-      currentCameraPos.lerp(parallaxPos, 1 - Math.exp(-7 * delta));
-      currentCameraLook.lerp(parallaxLook, 1 - Math.exp(-7 * delta));
+      currentCameraPos.lerp(parallaxPos, 1 - Math.exp(-14 * delta));
+      currentCameraLook.lerp(parallaxLook, 1 - Math.exp(-14 * delta));
 
       camera.position.copy(currentCameraPos);
       camera.lookAt(currentCameraLook);
