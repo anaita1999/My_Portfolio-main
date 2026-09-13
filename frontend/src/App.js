@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import '@/App.css';
 
@@ -23,9 +23,23 @@ import ShareWidget from '@/components/portfolio/ShareWidget';
 import CaseStudy from '@/pages/CaseStudy';
 import AdminLogin from '@/pages/admin/AdminLogin';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
+import useDynamicMeta from '@/hooks/useDynamicMeta';
 import { track } from '@/lib/analytics';
 import { PortfolioContentProvider } from '@/context/PortfolioContentContext';
 import { AdminAuthProvider } from '@/context/AdminAuthContext';
+import { ThemeProvider } from '@/context/ThemeContext';
+
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+  }, [pathname, hash]);
+
+  return null;
+}
 
 function Portfolio() {
   useLenisScroll();
@@ -33,7 +47,7 @@ function Portfolio() {
 
   useEffect(() => {
     document.body.classList.add('grain');
-    track('page_view', { page: 'home' });
+    track('page_view', { page: 'portfolio_sanctuary' });
     return () => document.body.classList.remove('grain');
   }, []);
 
@@ -84,25 +98,34 @@ function CaseStudyPage() {
 }
 
 function AppShell() {
+  useDynamicMeta();
   return (
     <>
+      <ScrollToTop />
       <Toaster
         theme="dark"
         position="bottom-right"
         toastOptions={{
           style: {
             background: 'rgba(10, 14, 20, 0.95)',
-            border: '1px solid rgba(224, 35, 28, 0.4)',
+            border: '1px solid rgba(0, 229, 255, 0.4)',
             color: '#dfe7e0',
             backdropFilter: 'blur(16px)',
           },
         }}
       />
       <Routes>
+        {/* Direct Portfolio Landing */}
         <Route path="/" element={<Portfolio />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+
+        {/* Detailed Case Studies */}
         <Route path="/work/:slug" element={<CaseStudyPage />} />
+
+        {/* Admin 2FA Authentication & Sanctuary CMS / CRM */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </>
   );
@@ -110,13 +133,15 @@ function AppShell() {
 
 function App() {
   return (
-    <PortfolioContentProvider>
-      <AdminAuthProvider>
-        <BrowserRouter>
-          <AppShell />
-        </BrowserRouter>
-      </AdminAuthProvider>
-    </PortfolioContentProvider>
+    <ThemeProvider>
+      <PortfolioContentProvider>
+        <AdminAuthProvider>
+          <BrowserRouter>
+            <AppShell />
+          </BrowserRouter>
+        </AdminAuthProvider>
+      </PortfolioContentProvider>
+    </ThemeProvider>
   );
 }
 

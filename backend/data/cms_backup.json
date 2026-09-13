@@ -1,14 +1,14 @@
 {
   "profile": {
     "name": "Anaita Pal",
-    "role": "Agentic AI Developer · Designer · AI-Automation Creator · Website Developer · Founder of Arisetek IT Solutions",
+    "role": "Agentic AI Developer \u00b7 Designer \u00b7 AI-Automation Creator \u00b7 Website Developer \u00b7 Founder of Arisetek IT Solutions",
     "tagline": "Architecting elite Agentic AI ecosystems.",
     "year": "2024",
-    "email": "anaita.pal.cse@gmail.com",
+    "email": "founder@arisetek.in",
     "phone": "+91 7980958364",
-    "location": "49, Baidyanath Dutta Sarani, Howrah — 113",
+    "location": "49, Baidyanath Dutta Sarani, Howrah \u2014 113",
     "linkedin": "https://www.linkedin.com/in/anaitapal1999/",
-    "bio": "Hello — I'm Anaita Pal, a Computer Science and Engineering graduate from Adamas University, West Bengal. With a strong focus on Agentic AI Systems and UI/UX development, I craft user-friendly, interactive interfaces and autonomous automation pipelines. My toolkit includes Python, React, Three.js, Node.js, Flutter, and Figma.\n\nFounder of Arisetek IT Solutions. Previously interned as a UI/UX Designer and Frontend Developer at Lisica Tech, and worked on fraud and risk analytics at Startek and Netscribes.",
+    "bio": "Hello \u2014 I'm Anaita Pal, a Computer Science and Engineering graduate from Adamas University, West Bengal. With a strong focus on Agentic AI Systems and UI/UX development, I craft user-friendly, interactive interfaces and autonomous automation pipelines. My toolkit includes Python, React, Three.js, Node.js, Flutter, and Figma.\n\nFounder of Arisetek IT Solutions. Previously interned as a UI/UX Designer and Frontend Developer at Lisica Tech, and worked on fraud and risk analytics at Startek and Netscribes.",
     "languages": [
       "Bengali",
       "Hindi",
@@ -16,29 +16,29 @@
     ]
   },
   "pricing": {
-    "hourly_rate_inr": "₹3,200 / hr",
+    "hourly_rate_inr": "\u20b93,200 / hr",
     "hourly_rate_usd": "$45 / hr",
-    "monthly_retainer_inr": "₹1,20,000 / mo",
+    "monthly_retainer_inr": "\u20b91,20,000 / mo",
     "monthly_retainer_usd": "$1,500 / mo",
     "budget_pills_inr": [
-      "< ₹1L",
-      "₹1L – ₹3L",
-      "₹3L – ₹6L",
-      "₹6L+"
+      "< \u20b91L",
+      "\u20b91L \u2013 \u20b93L",
+      "\u20b93L \u2013 \u20b96L",
+      "\u20b96L+"
     ],
     "budget_pills_usd": [
       "< $1.2k",
-      "$1.2k – $3.5k",
-      "$3.5k – $7k",
+      "$1.2k \u2013 $3.5k",
+      "$3.5k \u2013 $7k",
       "$7k+"
     ],
-    "default_budget_inr": "₹1L – ₹3L",
-    "default_budget_usd": "$1.2k – $3.5k",
+    "default_budget_inr": "\u20b91L \u2013 \u20b93L",
+    "default_budget_usd": "$1.2k \u2013 $3.5k",
     "packages": [
       {
         "id": "starter",
         "name": "Agentic MVP / Landing Experience",
-        "price_inr": "₹45,000",
+        "price_inr": "\u20b945,000",
         "price_usd": "$600",
         "duration": "1-2 weeks",
         "deliverables": [
@@ -51,7 +51,7 @@
       {
         "id": "scale",
         "name": "Full-Stack AI App / Automation",
-        "price_inr": "₹1,20,000",
+        "price_inr": "\u20b91,20,000",
         "price_usd": "$1,500",
         "duration": "3-4 weeks",
         "deliverables": [
@@ -64,7 +64,7 @@
       {
         "id": "enterprise",
         "name": "Enterprise Retainer / Custom Solution",
-        "price_inr": "₹2,50,000+",
+        "price_inr": "\u20b92,50,000+",
         "price_usd": "$3,200+",
         "duration": "Custom monthly",
         "deliverables": [
@@ -156,12 +156,12 @@
       "slug": "antirag",
       "title": "Anti-Ragging Mobile App",
       "tagline": "Real-time incident reporting & institutional safety network.",
-      "category": "Mobile App · Flutter",
+      "category": "Mobile App \u00b7 Flutter",
       "year": "2024",
       "featured": true,
       "color": "#e0231c",
       "glow": "rgba(224, 35, 28, 0.45)",
-      "emoji": "⛩️",
+      "emoji": "\u26e9\ufe0f",
       "subtitle": "Sanctuary & Safety Network",
       "stack": [
         "Flutter",
@@ -190,12 +190,12 @@
       "slug": "fast-meal",
       "title": "Fast Meal & Gourmet App",
       "tagline": "Hyperlocal food discovery with micro-interaction UX.",
-      "category": "UI/UX & Mobile · Flutter",
+      "category": "UI/UX & Mobile \u00b7 Flutter",
       "year": "2023",
       "featured": true,
       "color": "#ff8c28",
       "glow": "rgba(255, 140, 40, 0.45)",
-      "emoji": "🍱",
+      "emoji": "\ud83c\udf71",
       "subtitle": "Gourmet Bento & Fast Delivery",
       "stack": [
         "Flutter",
@@ -223,12 +223,12 @@
       "slug": "cyberfiction",
       "title": "Cyberfiction 3D Universe",
       "tagline": "Interactive metaverse clone with WebGL shaders & scroll physics.",
-      "category": "Creative Dev · Three.js",
+      "category": "Creative Dev \u00b7 Three.js",
       "year": "2023",
       "featured": true,
       "color": "#a05aff",
       "glow": "rgba(160, 90, 255, 0.45)",
-      "emoji": "🌌",
+      "emoji": "\ud83c\udf0c",
       "subtitle": "3D Metaverse Cyber Universe",
       "stack": [
         "HTML5 Canvas",
@@ -256,12 +256,12 @@
       "slug": "ai-voice-assistant",
       "title": "AI Voice & Neural Assistant",
       "tagline": "Natural language voice assistant with task automation.",
-      "category": "AI Automation · Python",
+      "category": "AI Automation \u00b7 Python",
       "year": "2024",
       "featured": true,
       "color": "#32d278",
       "glow": "rgba(50, 210, 120, 0.45)",
-      "emoji": "🤖",
+      "emoji": "\ud83e\udd16",
       "subtitle": "Neural Voice & AI Intelligence",
       "stack": [
         "Python",
@@ -287,59 +287,73 @@
   ],
   "experience": [
     {
-      "id": "exp-1",
-      "year": "2026 →",
+      "id": "exp-mtenk4pf",
+      "year": "2026 \u2192",
+      "role": "Founded  Arisetek",
+      "company": "Arisetek IT Solutions",
+      "location": "Kolkata",
+      "track": "design",
+      "bullets": [
+        "Architected autonomous LLM agents and web systems."
+      ]
+    },
+    {
+      "id": "exp-mtenjnva",
+      "year": "2026 \u2192",
+      "role": "Agentic AI Developer",
+      "company": "Arisetek IT Solutions",
+      "location": "Kolkata",
+      "track": "design",
+      "bullets": [
+        "Architected autonomous LLM agents and web systems."
+      ]
+    },
+    {
+      "year": "2026 \u2192",
       "role": "Boom Operator",
       "company": "Fusion CX",
       "location": "Howrah",
       "url": null,
-      "track": "design",
+      "track": null,
       "bullets": [
-        "Current role — started May 2026.",
-        "Managing audio and technical operations with rigorous quality standards."
+        "Current role \u2014 started May 2026."
       ]
     },
     {
-      "id": "exp-2",
-      "year": "2025 – 26",
+      "year": "2025 \u2013 26",
       "role": "Fraud Analyst",
       "company": "Startek India",
       "location": "Kolkata",
       "url": null,
       "track": "risk",
       "bullets": [
-        "Flipkart Fraud and Risk Analyst (Feb 2025 – Jan 2026, 1 year).",
-        "Monitored high-volume e-commerce transactions, detected suspicious patterns, and prevented fraudulent orders."
+        "Flipkart Fraud and Risk Analyst (Feb 2025 \u2013 Jan 2026, 1 year)."
       ]
     },
     {
-      "id": "exp-3",
-      "year": "2024 – 25",
+      "year": "2024 \u2013 25",
       "role": "Fraud Analyst",
       "company": "Netscribes",
       "location": "Kolkata",
       "url": null,
       "track": "risk",
       "bullets": [
-        "Fraud And Risk Management Analyst (Jul 2024 – Feb 2025, 8 months).",
-        "Audited merchant behaviors, handled chargeback mitigation, and generated risk assessment reports."
+        "Fraud And Risk Management Analyst (Jul 2024 \u2013 Feb 2025, 8 months)."
       ]
     },
     {
-      "id": "exp-4",
-      "year": "2023 – 24",
+      "year": "2023 \u2013 24",
       "role": "Graphic Designer",
       "company": "Lisica Tech",
       "location": "Kolkata, West Bengal, India",
       "url": "https://lisicatechinternship.netlify.app/",
       "track": "design",
       "bullets": [
-        "Graphic Designer (Nov 2023 – Feb 2024, 4 months).",
-        "Created user-friendly, engaging UI mockups and design token assets for web applications."
+        "Graphic Designer (Nov 2023 \u2013 Feb 2024, 4 months).",
+        "Created a user-friendly UI for their website."
       ]
     },
     {
-      "id": "exp-5",
       "year": "2023",
       "role": "Frontend Web Developer",
       "company": "Lisica Tech",
@@ -347,50 +361,71 @@
       "url": "https://lisicatechinternship.netlify.app/",
       "track": "design",
       "bullets": [
-        "Frontend Web Developer (May 2023 – Jul 2023, 3 months).",
-        "Developed interactive frontend components using modern JavaScript and responsive CSS."
+        "Frontend Web Developer (May 2023 \u2013 Jul 2023, 3 months).",
+        "Assisted in developing their website.",
+        "Implemented front-end technical solutions to meet project requirements."
       ]
     },
     {
-      "id": "exp-6",
       "year": "2023",
       "role": "Front-End Developer",
       "company": "National Institute for Industrial Training",
-      "location": "Kolkata",
       "url": "https://industrialtraining.wiki/",
       "track": "design",
       "bullets": [
-        "Actively engaged in creative web design and full-stack development with Node.js.",
-        "Delivered clean, modular components for industrial web training portals."
+        "Actively engaged in web creative design & development.",
+        "Implemented responsive web experiences with Node.js."
+      ]
+    },
+    {
+      "year": "2023",
+      "role": "UI/UX for Beginners",
+      "company": "Great Learning Academy",
+      "url": "https://olympus1.mygreatlearning.com/course_certificates/download.pdf?user_name=UOOWBTGZ",
+      "track": "design",
+      "bullets": [
+        "Certificate of completion \u2014 UI/UX for Beginners.",
+        "Foundations of graphic design with Photoshop."
+      ]
+    },
+    {
+      "year": "2023",
+      "role": "AWS Academy Graduate",
+      "company": "AWS Academy",
+      "url": "https://www.credly.com/badges/b16c454f-0e26-4876-bee3-dc10f0d36071/public_url",
+      "track": null,
+      "bullets": [
+        "Introduction to Cloud \u2014 Semester 2 (60 hours).",
+        "Cloud fundamentals & AWS core services."
       ]
     }
   ],
   "education": [
     {
       "id": "edu-1",
-      "year": "2015 – 2016",
+      "year": "2015 \u2013 2016",
       "level": "Madhyamik (10th)",
-      "school": "Ichapur Boy’s High School",
+      "school": "Ichapur Boy\u2019s High School",
       "score": "66%"
     },
     {
       "id": "edu-2",
-      "year": "2018 – 2021",
+      "year": "2018 \u2013 2021",
       "level": "Diploma CST",
       "school": "Kingston Polytechnic College (KPC)",
       "score": "88%"
     },
     {
       "id": "edu-3",
-      "year": "2021 – 2024",
+      "year": "2021 \u2013 2024",
       "level": "B.Tech CSE",
       "school": "Adamas University",
       "score": "58%"
     },
     {
       "id": "edu-4",
-      "year": "2026 – 2028",
-      "level": "MBA · Information Technology",
+      "year": "2026 \u2013 2028",
+      "level": "MBA \u00b7 Information Technology",
       "school": "Manipal University Jaipur",
       "score": "In progress"
     }
@@ -398,7 +433,7 @@
   "certifications": [
     {
       "id": "cert-1",
-      "title": "AWS Academy Graduate — Cloud Foundations",
+      "title": "AWS Academy Graduate \u2014 Cloud Foundations",
       "issuer": "AWS Academy",
       "year": "2023",
       "url": "https://www.credly.com/org/amazon-web-services/badge/aws-academy-graduate-aws-academy-cloud-foundations"

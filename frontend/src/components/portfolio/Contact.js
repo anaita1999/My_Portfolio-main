@@ -8,16 +8,15 @@ import { track as trackEvent } from '@/lib/analytics';
 import ResumeButton from './ResumeButton';
 import CoverLetterButton from './CoverLetterButton';
 import useSectionView from '@/hooks/useSectionView';
+import API_BASE from '@/apiConfig';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const API_BASE = (process.env.REACT_APP_BACKEND_URL || '').replace(/\/$/, '');
 
 export default function Contact() {
   const { profile: dynamicProfile } = usePortfolioContent();
   const PROFILE = dynamicProfile || {};
 
-  const email = PROFILE.email || 'anaita.pal.cse@gmail.com';
+  const email = PROFILE.email || 'founder@arisetek.in';
   const phone = PROFILE.phone || '+91 7980958364';
   const location = PROFILE.location || 'Howrah, West Bengal, India';
   const name = PROFILE.name || 'Anaita Pal';
@@ -70,13 +69,13 @@ export default function Contact() {
       });
       const data = await res.json();
 
-      if (res.ok && data.success) {
-        toast.success(data.message || 'Message sent successfully! I will get back to you shortly.');
+      if (res.ok) {
+        toast.success('Message sent successfully! I will get back to you shortly.');
         setForm({ name: '', email: '', message: '' });
         trackEvent('contact_form_success', { name: form.name });
       } else {
-        toast.error(data.detail || data.message || 'Failed to send message. Please try again.');
-        trackEvent('contact_form_error', { error: data.detail });
+        toast.error(data?.detail || 'Failed to send message. Please try again.');
+        trackEvent('contact_form_error', { error: data?.detail });
       }
     } catch (err) {
       console.error(err);

@@ -1,130 +1,190 @@
 export const PROFILE = {
-  name: 'Anaita Pal',
-  role: 'Agentic AI Developer · Designer · AI-Automation Creator · Website Developer · Founder of Arisetek IT Solutions',
-  tagline: 'Crafting intuitive, cinematic digital experiences.',
-  year: '2024',
-  email: 'anaita.pal.cse@gmail.com',
-  phone: '+91 7980958364',
-  location: '49, Baidyanath Dutta Sarani, Howrah — 113',
-  linkedin: 'https://www.linkedin.com/in/anaitapal1999/',
-  bio: `Hello — I'm Anaita Pal, a Computer Science and Engineering student at Adamas University, West Bengal, graduating in 2024. With a strong focus on UI/UX development, I craft user-friendly, interactive interfaces using tools like Figma and Visual Studio Code. My toolkit includes Node.js, Python, HTML, CSS, Flutter and application development.\n\nI interned as a UI/UX Designer and Frontend Developer at Lisica Tech, shipping engaging interfaces and responsive layouts. Selected projects include an anti-ragging mobile app, an Amazon clone, and an AI Voice Assistant — blending design with functionality end-to-end.`,
-  languages: ['Bengali', 'Hindi', 'English'],
+  "name": "Anaita Pal",
+  "role": "Agentic AI Developer · Designer · AI-Automation Creator · Website Developer · Founder of Arisetek IT Solutions",
+  "tagline": "Architecting elite Agentic AI ecosystems.",
+  "year": "2024",
+  "email": "founder@arisetek.in",
+  "phone": "+91 7980958364",
+  "location": "49, Baidyanath Dutta Sarani, Howrah — 113",
+  "linkedin": "https://www.linkedin.com/in/anaitapal1999/",
+  "bio": "Hello — I'm Anaita Pal, a Computer Science and Engineering graduate from Adamas University, West Bengal. With a strong focus on Agentic AI Systems and UI/UX development, I craft user-friendly, interactive interfaces and autonomous automation pipelines. My toolkit includes Python, React, Three.js, Node.js, Flutter, and Figma.\n\nFounder of Arisetek IT Solutions. Previously interned as a UI/UX Designer and Frontend Developer at Lisica Tech, and worked on fraud and risk analytics at Startek and Netscribes.",
+  "languages": [
+    "Bengali",
+    "Hindi",
+    "English"
+  ]
 };
 
 export const SKILLS = [
-  'Agentic AI Systems',
-  'AI Automation Pipelines',
-  'Cognitive & RAG Architecture',
-  'UI/UX Design',
-  'Web Development',
-  'App Development',
-  'Node.js',
-  'Python',
-  'HTML / CSS',
-  'Flutter',
-  'JavaScript',
-  'React',
+  "Agentic AI Systems",
+  "AI Automation Pipelines",
+  "Cognitive & RAG Architecture",
+  "UI/UX Design",
+  "Web Development",
+  "App Development",
+  "Node.js",
+  "Python",
+  "HTML / CSS",
+  "Flutter",
+  "JavaScript",
+  "React"
 ];
 
 export const EDUCATION = [
-  { year: '2015 – 2016', level: 'Madhyamik (10th)', school: 'Ichapur Boy’s High School', score: '66%' },
-  { year: '2018 – 2021', level: 'Diploma CST', school: 'Kingston Polytechnic College (KPC)', score: '88%' },
-  { year: '2021 – 2024', level: 'B.Tech CSE', school: 'Adamas University', score: '58%' },
-  { year: '2026 – 2028', level: 'MBA · Information Technology', school: 'Manipal University Jaipur', score: 'In progress' },
+  {
+    "id": "edu-1",
+    "year": "2015 – 2016",
+    "level": "Madhyamik (10th)",
+    "school": "Ichapur Boy’s High School",
+    "score": "66%"
+  },
+  {
+    "id": "edu-2",
+    "year": "2018 – 2021",
+    "level": "Diploma CST",
+    "school": "Kingston Polytechnic College (KPC)",
+    "score": "88%"
+  },
+  {
+    "id": "edu-3",
+    "year": "2021 – 2024",
+    "level": "B.Tech CSE",
+    "school": "Adamas University",
+    "score": "58%"
+  },
+  {
+    "id": "edu-4",
+    "year": "2026 – 2028",
+    "level": "MBA · Information Technology",
+    "school": "Manipal University Jaipur",
+    "score": "In progress"
+  }
 ];
 
 export const EXPERIENCE = [
   {
-    year: '2026 →',
-    role: 'Boom Operator',
-    company: 'Fusion CX',
-    location: 'Howrah',
-    url: null,
-    track: null,
-    bullets: [
-      'Current role — started May 2026.',
+    "id": "exp-mtenk4pf",
+    "year": "2026 →",
+    "role": "Founded  Arisetek",
+    "company": "Arisetek IT Solutions",
+    "location": "Kolkata",
+    "track": "design",
+    "bullets": [
+      "Architected autonomous LLM agents and web systems."
     ],
+    "period": "2026 →"
   },
   {
-    year: '2025 – 26',
-    role: 'Fraud Analyst',
-    company: 'Startek India',
-    location: 'Kolkata',
-    url: null,
-    track: 'risk',
-    bullets: [
-      'Flipkart Fraud and Risk Analyst (Feb 2025 – Jan 2026, 1 year).',
+    "id": "exp-mtenjnva",
+    "year": "2026 →",
+    "role": "Agentic AI Developer",
+    "company": "Arisetek IT Solutions",
+    "location": "Kolkata",
+    "track": "design",
+    "bullets": [
+      "Architected autonomous LLM agents and web systems."
     ],
+    "period": "2026 →"
   },
   {
-    year: '2024 – 25',
-    role: 'Fraud Analyst',
-    company: 'Netscribes',
-    location: 'Kolkata',
-    url: null,
-    track: 'risk',
-    bullets: [
-      'Fraud And Risk Management Analyst (Jul 2024 – Feb 2025, 8 months).',
+    "year": "2026 →",
+    "role": "Boom Operator",
+    "company": "Fusion CX",
+    "location": "Howrah",
+    "url": null,
+    "track": null,
+    "bullets": [
+      "Current role — started May 2026."
     ],
+    "period": "2026 →"
   },
   {
-    year: '2023 – 24',
-    role: 'Graphic Designer',
-    company: 'Lisica Tech',
-    location: 'Kolkata, West Bengal, India',
-    url: 'https://lisicatechinternship.netlify.app/',
-    track: 'design',
-    bullets: [
-      'Graphic Designer (Nov 2023 – Feb 2024, 4 months).',
-      'Created a user-friendly UI for their website.',
+    "year": "2025 – 26",
+    "role": "Fraud Analyst",
+    "company": "Startek India",
+    "location": "Kolkata",
+    "url": null,
+    "track": "risk",
+    "bullets": [
+      "Flipkart Fraud and Risk Analyst (Feb 2025 – Jan 2026, 1 year)."
     ],
+    "period": "2025 – 26"
   },
   {
-    year: '2023',
-    role: 'Frontend Web Developer',
-    company: 'Lisica Tech',
-    location: 'Kolkata, West Bengal, India',
-    url: 'https://lisicatechinternship.netlify.app/',
-    track: 'design',
-    bullets: [
-      'Frontend Web Developer (May 2023 – Jul 2023, 3 months).',
-      'Assisted in developing their website.',
-      'Implemented front-end technical solutions to meet project requirements.',
+    "year": "2024 – 25",
+    "role": "Fraud Analyst",
+    "company": "Netscribes",
+    "location": "Kolkata",
+    "url": null,
+    "track": "risk",
+    "bullets": [
+      "Fraud And Risk Management Analyst (Jul 2024 – Feb 2025, 8 months)."
     ],
+    "period": "2024 – 25"
   },
   {
-    year: '2023',
-    role: 'Front-End Developer',
-    company: 'National Institute for Industrial Training',
-    url: 'https://industrialtraining.wiki/',
-    track: 'design',
-    bullets: [
-      'Actively engaged in web creative design & development.',
-      'Implemented responsive web experiences with Node.js.',
+    "year": "2023 – 24",
+    "role": "Graphic Designer",
+    "company": "Lisica Tech",
+    "location": "Kolkata, West Bengal, India",
+    "url": "https://lisicatechinternship.netlify.app/",
+    "track": "design",
+    "bullets": [
+      "Graphic Designer (Nov 2023 – Feb 2024, 4 months).",
+      "Created a user-friendly UI for their website."
     ],
+    "period": "2023 – 24"
   },
   {
-    year: '2023',
-    role: 'UI/UX for Beginners',
-    company: 'Great Learning Academy',
-    url: 'https://olympus1.mygreatlearning.com/course_certificates/download.pdf?user_name=UOOWBTGZ',
-    track: 'design',
-    bullets: [
-      'Certificate of completion — UI/UX for Beginners.',
-      'Foundations of graphic design with Photoshop.',
+    "year": "2023",
+    "role": "Frontend Web Developer",
+    "company": "Lisica Tech",
+    "location": "Kolkata, West Bengal, India",
+    "url": "https://lisicatechinternship.netlify.app/",
+    "track": "design",
+    "bullets": [
+      "Frontend Web Developer (May 2023 – Jul 2023, 3 months).",
+      "Assisted in developing their website.",
+      "Implemented front-end technical solutions to meet project requirements."
     ],
+    "period": "2023"
   },
   {
-    year: '2023',
-    role: 'AWS Academy Graduate',
-    company: 'AWS Academy',
-    url: 'https://www.credly.com/badges/b16c454f-0e26-4876-bee3-dc10f0d36071/public_url',
-    track: null,
-    bullets: [
-      'Introduction to Cloud — Semester 2 (60 hours).',
-      'Cloud fundamentals & AWS core services.',
+    "year": "2023",
+    "role": "Front-End Developer",
+    "company": "National Institute for Industrial Training",
+    "url": "https://industrialtraining.wiki/",
+    "track": "design",
+    "bullets": [
+      "Actively engaged in web creative design & development.",
+      "Implemented responsive web experiences with Node.js."
     ],
+    "period": "2023"
   },
+  {
+    "year": "2023",
+    "role": "UI/UX for Beginners",
+    "company": "Great Learning Academy",
+    "url": "https://olympus1.mygreatlearning.com/course_certificates/download.pdf?user_name=UOOWBTGZ",
+    "track": "design",
+    "bullets": [
+      "Certificate of completion — UI/UX for Beginners.",
+      "Foundations of graphic design with Photoshop."
+    ],
+    "period": "2023"
+  },
+  {
+    "year": "2023",
+    "role": "AWS Academy Graduate",
+    "company": "AWS Academy",
+    "url": "https://www.credly.com/badges/b16c454f-0e26-4876-bee3-dc10f0d36071/public_url",
+    "track": null,
+    "bullets": [
+      "Introduction to Cloud — Semester 2 (60 hours).",
+      "Cloud fundamentals & AWS core services."
+    ],
+    "period": "2023"
+  }
 ];
 
 export const CERTIFICATIONS = [

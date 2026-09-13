@@ -64,7 +64,7 @@ export default function CaseStudy() {
             404 · Case Study Not Found
           </div>
           <Link
-            to="/"
+            to="/portfolio#projects"
             className="pill"
             data-testid="casestudy-404-back"
           >
@@ -137,7 +137,7 @@ export default function CaseStudy() {
       >
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <Link
-            to="/"
+            to="/portfolio#projects"
             data-testid={CASESTUDY.backLink}
             className="cursor-hover font-mono text-[10px] uppercase tracking-[0.24em] text-[#dfe7e0] hover:text-[#e0231c] inline-flex items-center gap-2"
             style={{ transition: 'color 200ms ease' }}
@@ -175,7 +175,7 @@ export default function CaseStudy() {
 
           <h1
             data-testid={CASESTUDY.title}
-            className="font-display font-light text-white"
+            className="font-display font-light text-white live-glow-vermilion"
             style={{
               fontSize: 'clamp(52px, 10vw, 160px)',
               letterSpacing: '-0.045em',
@@ -183,14 +183,14 @@ export default function CaseStudy() {
             }}
           >
             <span className="block overflow-hidden">
-              <span data-cs-hero className="inline-block">{project.title}</span>
+              <span data-cs-hero className="inline-block live-shimmer-silver">{project.title}</span>
             </span>
           </h1>
 
           <div className="block overflow-hidden mt-6">
             <p
               data-cs-hero
-              className="font-display italic text-[#b4bfb7] max-w-3xl font-light"
+              className="font-display italic live-shimmer-vermilion max-w-3xl font-normal"
               style={{ fontSize: 'clamp(20px, 2.2vw, 32px)', letterSpacing: '-0.015em', lineHeight: 1.25 }}
             >
               {subtitle}

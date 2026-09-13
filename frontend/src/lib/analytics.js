@@ -2,8 +2,9 @@
 // to the backend. Fire-and-forget; failures are silent.
 
 import axios from 'axios';
+import API_BASE from '../apiConfig';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${API_BASE}/api`;
 
 let queue = [];
 let timer = null;

@@ -82,15 +82,15 @@ export default function Experience() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16" data-fade>
           <div>
             <h2
-              className="font-display font-light text-white"
+              className="font-display font-light text-white live-glow-vermilion"
               style={{
                 fontSize: 'clamp(26px, 3.2vw, 44px)',
                 lineHeight: 1.15,
                 letterSpacing: '-0.025em',
               }}
             >
-              Milestones along the <span className="italic text-[#dfe7e0]">craft</span> &{' '}
-              <span className="italic text-[#e0231c]">operations</span> path.
+              Milestones along the <span className="italic live-shimmer-silver">craft</span> &{' '}
+              <span className="italic live-shimmer-vermilion live-glow-vermilion font-semibold">operations</span> path.
             </h2>
           </div>
 
@@ -135,7 +135,7 @@ export default function Experience() {
         <div className="relative border-l border-[rgba(223,231,224,0.12)] ml-4 md:ml-8 pl-6 md:pl-12 space-y-10">
           {filtered.map((e, i) => (
             <div
-              key={e.role + e.company}
+              key={e.id || `${e.role}-${e.company}-${i}`}
               data-testid={EXP_IDS.item(slug(e.role))}
               className="relative group"
             >
@@ -171,7 +171,7 @@ export default function Experience() {
                   </div>
                   <div className="shrink-0 text-left sm:text-right">
                     <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#e0231c] bg-[rgba(224,35,28,0.1)] px-3 py-1 rounded-full border border-[rgba(224,35,28,0.25)]">
-                      {e.period}
+                      {e.period || e.year || e.dates}
                     </span>
                   </div>
                 </div>

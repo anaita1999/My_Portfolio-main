@@ -4,8 +4,9 @@ import axios from 'axios';
 import { gsap } from 'gsap';
 import { toast } from 'sonner';
 import { track } from '@/lib/analytics';
+import API_BASE from '@/apiConfig';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${API_BASE}/api`;
 
 export default function CoverLetterButton({ testId = 'cover-letter-btn', label = 'Cover letter' }) {
   const [open, setOpen] = useState(false);

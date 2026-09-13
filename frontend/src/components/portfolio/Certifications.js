@@ -78,15 +78,15 @@ export default function Certifications() {
 
         <div className="mb-14" data-fade>
           <h2
-            className="font-display font-light text-white"
+            className="font-display font-light text-white live-glow-vermilion"
             style={{
               fontSize: 'clamp(26px, 3.2vw, 44px)',
               lineHeight: 1.15,
               letterSpacing: '-0.025em',
             }}
           >
-            Verified credentials in <span className="italic text-[#dfe7e0]">cloud</span>,{' '}
-            <span className="italic text-[#e0231c]">intelligence</span> & design.
+            Verified credentials in <span className="italic live-shimmer-silver">cloud</span>,{' '}
+            <span className="italic live-shimmer-vermilion live-glow-vermilion font-semibold">intelligence</span> & design.
           </h2>
         </div>
 

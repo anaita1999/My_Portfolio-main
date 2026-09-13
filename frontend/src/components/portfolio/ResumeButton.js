@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { HERO, CONTACT } from '@/constants/testIds';
 import { track } from '@/lib/analytics';
+import API_BASE from '@/apiConfig';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${API_BASE}/api`;
 
 export default function ResumeButton({ variant = 'primary', testId = HERO.ctaResume, label = 'Download resume' }) {
   const onClick = async (e) => {

@@ -151,7 +151,7 @@ export default function Skills() {
         {/* Section Headline */}
         <div className="mb-12" data-fade>
           <h2
-            className="font-display font-light text-white"
+            className="font-display font-light text-white live-glow-vermilion"
             style={{
               fontSize: 'clamp(28px, 3.6vw, 48px)',
               lineHeight: 1.15,
@@ -159,8 +159,8 @@ export default function Skills() {
               textShadow: '0 2px 20px rgba(0,0,0,0.8)',
             }}
           >
-            Architecting <span className="italic font-normal text-[#dfe7e0]">autonomous intelligence</span>,{' '}
-            <span className="italic font-normal text-[#ff3322]" style={{ textShadow: '0 0 20px rgba(255,51,34,0.5)' }}>
+            Architecting <span className="italic font-normal live-shimmer-silver">autonomous intelligence</span>,{' '}
+            <span className="italic font-normal live-shimmer-vermilion font-semibold">
               cognitive workflows
             </span>{' '}
             & scalable digital ecosystems.
@@ -177,10 +177,11 @@ export default function Skills() {
         >
           {SKILLS.map((s, i) => {
             const name = typeof s === 'string' ? s : s?.name || 'Skill';
-            const details = SKILL_DETAILS[name] || {
-              category: 'Technical',
-              desc: typeof s === 'object' && s?.desc ? s.desc : 'Core discipline and production-grade engineering craft.',
-              mastery: typeof s === 'object' && s?.level ? s.level : '90%',
+            const fallback = SKILL_DETAILS[name] || {};
+            const details = {
+              category: (typeof s === 'object' && s?.category) || fallback.category || 'Technical',
+              desc: (typeof s === 'object' && s?.desc) || fallback.desc || 'Core discipline and production-grade engineering craft.',
+              mastery: (typeof s === 'object' && (s?.mastery || s?.level)) || fallback.mastery || '90%',
             };
             const skillSlug = slug(name);
             const testId = typeof SKILLS_IDS.item === 'function' ? SKILLS_IDS.item(skillSlug) : `skills-item-${skillSlug}`;

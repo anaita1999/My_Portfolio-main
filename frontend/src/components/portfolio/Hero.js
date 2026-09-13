@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { HERO } from '@/constants/testIds';
-import { PROFILE } from '@/lib/portfolioData';
+import { usePortfolioContent } from '@/context/PortfolioContentContext';
 import useSectionView from '@/hooks/useSectionView';
 
 export default function Hero() {
+  const { profile: dynamicProfile } = usePortfolioContent();
+  const PROFILE = dynamicProfile || {};
   const containerRef = useRef(null);
   const viewRef = useSectionView('home');
   const [scrollY, setScrollY] = useState(0);
@@ -180,14 +182,14 @@ export default function Hero() {
 
               {/* Line 2: REVEALS THE */}
               <div className="font-display font-black italic uppercase tracking-tight text-white leading-none text-[clamp(28px,4.5vw,58px)]">
-                <span className="shimmer-text-silver drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
+                <span className="live-shimmer-silver drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
                   Reveals The
                 </span>
               </div>
 
               {/* Line 3: INTELLIGENCE. */}
               <div className="font-display font-black italic uppercase tracking-tight leading-none text-[clamp(32px,5.2vw,70px)] mt-2">
-                <span className="shimmer-text-vermilion drop-shadow-[0_0_28px_rgba(255,51,34,0.7)]">
+                <span className="live-shimmer-vermilion live-glow-vermilion drop-shadow-[0_0_28px_rgba(255,51,34,0.7)]">
                   Intelligence
                 </span>
                 <span className="text-[#ff3322] drop-shadow-[0_0_14px_#ff3322]">.</span>
@@ -205,7 +207,7 @@ export default function Hero() {
               {BADGES.map((b) => (
                 <div key={b.label}>
                   <span
-                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.16em] font-semibold transition-all duration-300 hover:scale-105"
+                    className="live-badge-glow inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.16em] font-semibold transition-all duration-300 hover:scale-105"
                     style={{
                       background: b.bg,
                       color: b.color,
@@ -243,7 +245,7 @@ export default function Hero() {
         >
           <div
             data-testid={HERO.title}
-            className="w-full flex items-center justify-between pointer-events-none select-none font-display font-extrabold uppercase overflow-visible"
+            className="w-full flex items-center justify-between select-none font-display font-extrabold uppercase overflow-visible"
             style={{
               fontSize: 'clamp(32px, 7.2vw, 115px)',
               lineHeight: 0.9,
@@ -254,11 +256,16 @@ export default function Hero() {
             {NAME_LETTERS.map((char, i) => (
               <span
                 key={i}
-                className="inline-block transition-transform duration-300 hover:scale-105"
+                className={`inline-block transition-transform duration-300 ${
+                  char === '·'
+                    ? 'live-glow-vermilion live-shimmer-vermilion text-[#ff3322]'
+                    : 'live-interactive-char-vermilion cursor-pointer'
+                }`}
                 style={{
                   color: char === '·' ? '#ff3322' : '#dfe7e0',
                   opacity: char === '·' ? 1.0 : 0.94,
-                  textShadow: char === '·' ? '0 0 16px #ff3322' : '0 4px 20px rgba(0,0,0,0.85)',
+                  textShadow: char === '·' ? '0 0 20px #ff3322' : '0 4px 20px rgba(0,0,0,0.85)',
+                  animation: `live-char-wave 4s ease-in-out infinite ${i * 0.15}s`,
                 }}
               >
                 {char}

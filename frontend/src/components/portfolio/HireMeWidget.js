@@ -7,8 +7,9 @@ import { HIRE } from '@/constants/testIds';
 import { track } from '@/lib/analytics';
 import useCurrency, { BUDGET_PILLS, DEFAULT_BUDGET } from '@/hooks/useCurrency';
 import { usePortfolioContent } from '@/context/PortfolioContentContext';
+import API_BASE from '@/apiConfig';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${API_BASE}/api`;
 
 export default function HireMeWidget() {
   const { pricing } = usePortfolioContent();

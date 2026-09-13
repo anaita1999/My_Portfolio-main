@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useAdminAuth } from '@/context/AdminAuthContext';
@@ -17,10 +17,12 @@ export default function AdminLogin() {
   const [useBackupCode, setUseBackupCode] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // If already authenticated, direct to dashboard
-  if (isAuthenticated) {
-    navigate('/admin', { replace: true });
-  }
+  // If already authenticated, direct to dashboard safely in effect
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/admin', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   // Handle Step 1: Email & Password
   const handleStep1Submit = async (e) => {
@@ -55,7 +57,7 @@ export default function AdminLogin() {
     setLoading(true);
     try {
       const data = await loginStep2(tempToken, code);
-      if (data.access_token) {
+      if (data.success) {
         toast.success('2-Factor Authentication verified. Welcome back, Anaita!');
         navigate('/admin');
       }
@@ -75,7 +77,7 @@ export default function AdminLogin() {
       <div
         className="absolute pointer-events-none w-[600px] h-[600px] rounded-full blur-[140px] opacity-25"
         style={{
-          background: 'radial-gradient(circle, #e0231c 0%, rgba(224,35,28,0) 70%)',
+          background: 'radial-gradient(circle, #FF6B00 0%, rgba(255,107,0,0) 70%)',
           top: '20%',
           left: '50%',
           transform: 'translateX(-50%)',
@@ -83,15 +85,15 @@ export default function AdminLogin() {
       />
 
       <div
-        className="w-full max-w-md relative z-10 p-8 rounded-2xl border border-[rgba(224,35,28,0.25)] bg-[rgba(10,14,20,0.85)] backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(224,35,28,0.15)]"
+        className="w-full max-w-md relative z-10 p-8 rounded-2xl border border-[rgba(255,107,0,0.25)] bg-[rgba(10,14,20,0.85)] backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(255,107,0,0.15)]"
       >
         {/* Header Branding */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-3 bg-[#e0231c] text-white font-mono font-bold text-sm shadow-[0_0_24px_rgba(224,35,28,0.6)]">
-            AP
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-3 bg-[rgba(255,107,0,0.12)] border border-[rgba(255,107,0,0.35)] p-2.5 shadow-[0_0_24px_rgba(255,107,0,0.35)]">
+            <img src="/arisetek-mark-dark.svg" alt="Arisetek" className="w-full h-full object-contain" />
           </div>
           <h1 className="font-display text-2xl font-light text-white tracking-wide">
-            Sanctuary <span className="text-[#e0231c] font-normal">Command Portal</span>
+            Arisetek <span className="text-[#FF6B00] font-normal">CMS Portal</span>
           </h1>
           <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#78837c] mt-1.5 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#32d278] shadow-[0_0_8px_#32d278]" />
@@ -104,7 +106,7 @@ export default function AdminLogin() {
           <div
             className={`flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider transition-all duration-300 ${
               step === 1
-                ? 'bg-[rgba(224,35,28,0.2)] text-[#e0231c] border border-[rgba(224,35,28,0.4)]'
+                ? 'bg-[rgba(255,107,0,0.2)] text-[#FF6B00] border border-[rgba(255,107,0,0.4)]'
                 : 'bg-[rgba(255,255,255,0.05)] text-[#78837c]'
             }`}
           >
@@ -114,7 +116,7 @@ export default function AdminLogin() {
           <div
             className={`flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider transition-all duration-300 ${
               step === 2
-                ? 'bg-[rgba(224,35,28,0.2)] text-[#e0231c] border border-[rgba(224,35,28,0.4)]'
+                ? 'bg-[rgba(255,107,0,0.2)] text-[#FF6B00] border border-[rgba(255,107,0,0.4)]'
                 : 'bg-[rgba(255,255,255,0.05)] text-[#78837c]'
             }`}
           >
@@ -127,16 +129,16 @@ export default function AdminLogin() {
           <form onSubmit={handleStep1Submit} className="space-y-5">
             <div>
               <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#aab4ad] mb-2">
-                Admin Email Address
+                Admin User ID
               </label>
               <div className="relative">
                 <input
-                  type="email"
+                  type="text"
                   required
-                  placeholder="anaita.pal.cse@gmail.com"
+                  placeholder="Enter User ID or Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(223,231,224,0.12)] text-white text-sm focus:outline-none focus:border-[#e0231c] focus:ring-1 focus:ring-[#e0231c] transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(223,231,224,0.12)] text-white text-sm focus:outline-none focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] transition-colors"
                 />
               </div>
             </div>
@@ -152,7 +154,7 @@ export default function AdminLogin() {
                   placeholder="••••••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(223,231,224,0.12)] text-white text-sm focus:outline-none focus:border-[#e0231c] focus:ring-1 focus:ring-[#e0231c] transition-colors pr-11"
+                  className="w-full px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(223,231,224,0.12)] text-white text-sm focus:outline-none focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] transition-colors pr-11"
                 />
                 <button
                   type="button"
@@ -167,9 +169,9 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 mt-2 rounded-lg font-mono text-xs uppercase tracking-[0.24em] font-semibold text-white transition-all duration-300 shadow-[0_0_20px_rgba(224,35,28,0.4)] disabled:opacity-50 hover:scale-[1.01]"
+              className="w-full py-3.5 mt-2 rounded-lg font-mono text-xs uppercase tracking-[0.24em] font-semibold text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,107,0,0.4)] disabled:opacity-50 hover:scale-[1.01]"
               style={{
-                background: 'linear-gradient(135deg, #ff5a3c, #e0231c)',
+                background: 'linear-gradient(135deg, #ff5a3c, #FF6B00)',
               }}
             >
               {loading ? 'Verifying Credentials...' : 'Continue to 2FA Code →'}
@@ -180,7 +182,7 @@ export default function AdminLogin() {
         {/* Form Step 2: 2FA TOTP Code */}
         {step === 2 && (
           <form onSubmit={handleStep2Submit} className="space-y-5">
-            <div className="p-3.5 rounded-lg bg-[rgba(224,35,28,0.08)] border border-[rgba(224,35,28,0.2)] text-xs text-[#dfe7e0] leading-relaxed">
+            <div className="p-3.5 rounded-lg bg-[rgba(255,107,0,0.08)] border border-[rgba(255,107,0,0.2)] text-xs text-[#dfe7e0] leading-relaxed">
               Open your <strong>Google Authenticator</strong>, <strong>Authy</strong>, or password manager app and enter the active 6-digit code for <em>Anaita Pal Portfolio</em>.
             </div>
 
@@ -192,7 +194,7 @@ export default function AdminLogin() {
                 <button
                   type="button"
                   onClick={() => setUseBackupCode(!useBackupCode)}
-                  className="font-mono text-[9px] uppercase tracking-wider text-[#e0231c] hover:underline"
+                  className="font-mono text-[9px] uppercase tracking-wider text-[#FF6B00] hover:underline"
                 >
                   {useBackupCode ? 'Use 6-digit OTP' : 'Use backup code'}
                 </button>
@@ -206,7 +208,7 @@ export default function AdminLogin() {
                 maxLength={useBackupCode ? 32 : 6}
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                className="w-full px-4 py-3.5 rounded-lg bg-[rgba(255,255,255,0.06)] border border-[rgba(224,35,28,0.4)] text-center text-white font-mono text-xl tracking-[0.3em] focus:outline-none focus:ring-2 focus:ring-[#e0231c] transition-all"
+                className="w-full px-4 py-3.5 rounded-lg bg-[rgba(255,255,255,0.06)] border border-[rgba(255,107,0,0.4)] text-center text-white font-mono text-xl tracking-[0.3em] focus:outline-none focus:ring-2 focus:ring-[#FF6B00] transition-all"
               />
             </div>
 
@@ -222,9 +224,9 @@ export default function AdminLogin() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-2/3 py-3.5 rounded-lg font-mono text-xs uppercase tracking-[0.2em] font-semibold text-white transition-all duration-300 shadow-[0_0_20px_rgba(224,35,28,0.4)] disabled:opacity-50 hover:scale-[1.01]"
+                className="w-2/3 py-3.5 rounded-lg font-mono text-xs uppercase tracking-[0.2em] font-semibold text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,107,0,0.4)] disabled:opacity-50 hover:scale-[1.01]"
                 style={{
-                  background: 'linear-gradient(135deg, #ff5a3c, #e0231c)',
+                  background: 'linear-gradient(135deg, #ff5a3c, #FF6B00)',
                 }}
               >
                 {loading ? 'Authenticating...' : 'Unlock Admin 🔐'}
@@ -237,7 +239,7 @@ export default function AdminLogin() {
         <div className="mt-8 text-center pt-6 border-t border-[rgba(223,231,224,0.08)]">
           <Link
             to="/"
-            className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#78837c] hover:text-[#e0231c] transition-colors"
+            className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#78837c] hover:text-[#FF6B00] transition-colors"
           >
             ← Return to Public Portfolio
           </Link>

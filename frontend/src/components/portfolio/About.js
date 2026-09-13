@@ -8,9 +8,16 @@ import useSectionView from '@/hooks/useSectionView';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
-  const { profile: PROFILE, education: EDUCATION } = usePortfolioContent();
+  const { profile: PROFILE, education: EDUCATION, experience: EXPERIENCE } = usePortfolioContent();
   const rootRef = useRef(null);
   const viewRef = useSectionView('about');
+
+  const languagesList = Array.isArray(PROFILE?.languages) && PROFILE.languages.length > 0
+    ? PROFILE.languages
+    : ['Bengali', 'Hindi', 'English'];
+  const languagesCount = languagesList.length;
+  const languagesStr = languagesList.join(' · ');
+  const expCount = (EXPERIENCE && EXPERIENCE.length > 0) ? `${EXPERIENCE.length}` : '4';
 
   useEffect(() => {
     ScrollTrigger.refresh();
@@ -63,7 +70,7 @@ export default function About() {
           {/* Main Left Editorial Text */}
           <div className="lg:col-span-7" data-fade>
             <h2
-              className="font-display font-light text-white"
+              className="font-display font-light text-white live-glow-vermilion"
               style={{
                 fontSize: 'clamp(28px, 3.6vw, 48px)',
                 lineHeight: 1.12,
@@ -73,7 +80,7 @@ export default function About() {
               I design & build{' '}
               <span className="italic text-[#dfe7e0] border-b border-[#e0231c]">interfaces</span>{' '}
               that feel{' '}
-              <span className="italic text-[#e0231c] glow-vermilion">alive</span>.
+              <span className="italic live-shimmer-vermilion live-glow-vermilion font-semibold">alive</span>.
             </h2>
 
             <p
@@ -104,24 +111,35 @@ export default function About() {
                   Academic Journey
                 </span>
                 <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#e0231c]">
-                  Accreditation
+                  Timeline
                 </span>
               </div>
               <div className="space-y-5">
-                {EDUCATION.map((e, i) => (
-                  <div key={i} className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="font-display text-white text-base font-medium">{e.level}</div>
-                      <div className="text-[#8f9a93] text-xs mt-0.5">{e.school}</div>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <div className="font-mono text-[9px] text-[#78837c] uppercase tracking-widest">
-                        {e.year}
+                {EDUCATION.map((e, i) => {
+                  const yearStr = e.year || '';
+                  const match = yearStr.match(/^(.*?)\s*([–—\-→])\s*(.*)$/);
+                  return (
+                    <div key={i} className="flex items-center justify-between gap-4">
+                      <div>
+                        <div className="font-display text-white text-base font-medium">{e.level}</div>
+                        <div className="text-[#8f9a93] text-xs mt-0.5">{e.school}</div>
                       </div>
-                      <div className="font-mono text-xs text-[#e0231c] mt-0.5 font-medium">{e.score}</div>
+                      <div className="text-right shrink-0">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full font-mono text-xs font-medium text-[#dfe7e0] bg-[rgba(255,255,255,0.05)] border border-[rgba(223,231,224,0.14)] tracking-wide shadow-sm">
+                          {match ? (
+                            <>
+                              <span>{match[1]}</span>
+                              <span className="text-[#78837c] mx-1.5">{match[2]}</span>
+                              <span className="text-[#e0231c] font-semibold">{match[3]}</span>
+                            </>
+                          ) : (
+                            <span className="text-[#e0231c] font-semibold">{yearStr}</span>
+                          )}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -135,7 +153,7 @@ export default function About() {
                   className="font-display font-light text-white mt-2"
                   style={{ fontSize: 38, letterSpacing: '-0.04em' }}
                 >
-                  4<span className="text-[#e0231c]">+</span>
+                  {expCount}<span className="text-[#e0231c]">+</span>
                 </div>
                 <div className="text-[#8f9a93] text-xs mt-1">Roles & credentials</div>
               </div>
@@ -148,9 +166,9 @@ export default function About() {
                   className="font-display font-light text-white mt-2"
                   style={{ fontSize: 38, letterSpacing: '-0.04em' }}
                 >
-                  3
+                  {languagesCount}
                 </div>
-                <div className="text-[#8f9a93] text-xs mt-1">Bengali · Hindi · English</div>
+                <div className="text-[#8f9a93] text-xs mt-1">{languagesStr}</div>
               </div>
             </div>
           </div>

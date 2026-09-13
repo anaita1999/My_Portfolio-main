@@ -143,15 +143,15 @@ export default function Projects() {
 
         <div className="mb-14" data-fade>
           <h2
-            className="font-display font-light text-white"
+            className="font-display font-light text-white live-glow-vermilion"
             style={{
               fontSize: 'clamp(26px, 3.2vw, 44px)',
               lineHeight: 1.15,
               letterSpacing: '-0.025em',
             }}
           >
-            Crafting systems across <span className="italic text-[#dfe7e0]">AI workflows</span>,{' '}
-            <span className="italic text-[#e0231c] glow-vermilion">interaction design</span> & engineering.
+            Crafting systems across <span className="italic live-shimmer-silver">AI workflows</span>,{' '}
+            <span className="italic live-shimmer-vermilion live-glow-vermilion font-semibold">interaction design</span> & engineering.
           </h2>
         </div>
 

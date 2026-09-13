@@ -51,30 +51,42 @@ export default function Navbar() {
     >
       <div className="max-w-[1440px] mx-auto px-6 flex items-center justify-between">
         {/* Brand */}
-        <a
-          href="#home"
-          onClick={jump('home')}
-          className="flex items-center gap-3 cursor-hover group"
-          data-testid="nav-brand"
-        >
-          <span
-            className="w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs font-bold text-white transition-all duration-300 group-hover:scale-105"
-            style={{
-              background: '#e0231c',
-              boxShadow: '0 0 20px rgba(224,35,28,0.5)',
-            }}
+        <div className="flex items-center gap-3">
+          <a
+            href="#home"
+            onClick={jump('home')}
+            className="flex items-center gap-3 cursor-hover group"
+            data-testid="nav-brand"
           >
-            AP
-          </span>
-          <div className="flex flex-col">
-            <span className="font-display font-medium text-white tracking-[0.14em] text-xs uppercase group-hover:text-[#e0231c] transition-colors">
-              Anaita Pal
+            <span
+              className="w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs font-bold text-white transition-all duration-300 group-hover:scale-105"
+              style={{
+                background: '#e0231c',
+                boxShadow: '0 0 20px rgba(224,35,28,0.5)',
+              }}
+            >
+              AP
             </span>
-            <span className="font-mono text-[8px] uppercase tracking-[0.32em] text-[#78837c] mt-1">
-              Creative Portfolio
-            </span>
-          </div>
-        </a>
+            <div className="flex flex-col">
+              <span className="font-display font-medium text-white tracking-[0.14em] text-xs uppercase group-hover:text-[#e0231c] transition-colors">
+                Anaita Pal
+              </span>
+              <span className="font-mono text-[8px] uppercase tracking-[0.32em] text-[#78837c] mt-1">
+                Sanctuary Portfolio
+              </span>
+            </div>
+          </a>
+
+          <a
+            href="https://arisetek.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 ml-3 font-mono text-[10px] uppercase tracking-wider text-[#00E5FF] hover:text-white px-2.5 py-1 rounded bg-[#00E5FF]/10 border border-[#00E5FF]/30 hover:border-[#00E5FF]/60 transition-all"
+          >
+            <span>🏢 Arisetek</span>
+            <span>↗</span>
+          </a>
+        </div>
 
         <nav className="hidden md:flex items-center gap-1">
           {LINKS.map((l) => (

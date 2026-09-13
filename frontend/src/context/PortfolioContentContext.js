@@ -10,7 +10,7 @@ import {
   TESTIMONIALS as DEFAULT_TESTIMONIALS,
 } from '@/lib/portfolioData';
 
-const API_BASE = (process.env.REACT_APP_BACKEND_URL || '').replace(/\/$/, '');
+import API_BASE from '../apiConfig';
 
 const DEFAULT_PRICING = {
   hourly_rate_inr: '₹2,500 / hr',
@@ -39,24 +39,34 @@ export function PortfolioContentProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const [arisetekContent, setArisetekContent] = useState({});
+
   const fetchContent = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${API_BASE}/api/content`, { timeout: 4000 });
-      if (res.data && typeof res.data === 'object') {
+      const [res, arisetekRes] = await Promise.allSettled([
+        axios.get(`${API_BASE}/api/content`, { timeout: 4000 }),
+        axios.get(`${API_BASE}/api/arisetek-content`, { timeout: 4000 })
+      ]);
+      
+      if (res.status === 'fulfilled' && res.value.data && typeof res.value.data === 'object') {
         setContent((prev) => ({
           ...prev,
-          ...res.data,
-          profile: res.data.profile || prev.profile,
-          pricing: res.data.pricing || prev.pricing,
-          skills: res.data.skills || prev.skills,
-          projects: res.data.projects || prev.projects,
-          experience: res.data.experience || prev.experience,
-          education: res.data.education || prev.education,
-          certifications: res.data.certifications || prev.certifications,
-          testimonials: res.data.testimonials || prev.testimonials,
+          ...res.value.data,
+          profile: res.value.data.profile || prev.profile,
+          pricing: res.value.data.pricing || prev.pricing,
+          skills: res.value.data.skills || prev.skills,
+          projects: res.value.data.projects || prev.projects,
+          experience: res.value.data.experience || prev.experience,
+          education: res.value.data.education || prev.education,
+          certifications: res.value.data.certifications || prev.certifications,
+          testimonials: res.value.data.testimonials || prev.testimonials,
         }));
         setError(null);
+      }
+      
+      if (arisetekRes.status === 'fulfilled' && arisetekRes.value.data && typeof arisetekRes.value.data === 'object') {
+        setArisetekContent(arisetekRes.value.data);
       }
     } catch (err) {
       console.warn('Using default offline portfolio content:', err.message);
@@ -70,17 +80,25 @@ export function PortfolioContentProvider({ children }) {
     fetchContent();
   }, [fetchContent]);
 
-  const updateSectionLocally = useCallback((section, data) => {
-    setContent((prev) => ({
-      ...prev,
-      [section]: data,
-    }));
+  const updateSectionLocally = useCallback((section, data, isArisetek = false) => {
+    if (isArisetek) {
+      setArisetekContent((prev) => ({
+        ...prev,
+        [section]: data,
+      }));
+    } else {
+      setContent((prev) => ({
+        ...prev,
+        [section]: data,
+      }));
+    }
   }, []);
 
   return (
     <PortfolioContentContext.Provider
       value={{
         content,
+        arisetekContent,
         profile: content.profile || DEFAULT_PROFILE,
         pricing: content.pricing || DEFAULT_PRICING,
         skills: content.skills || DEFAULT_SKILLS,
